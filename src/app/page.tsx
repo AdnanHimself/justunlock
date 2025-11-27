@@ -77,11 +77,12 @@ export default function Home() {
                 <Lock className="w-10 h-10 md:w-12 md:h-12 text-blue-600 dark:text-blue-400" />
               </div>
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                BaseLock
+                Monetize Anything.
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                The premium way to monetize content on Base.<br className="hidden md:block" />
-                Secure, simple, and decentralized.
+                Stop giving away your value. Lock any link, share it, and <span className="text-foreground font-medium">get paid instantly</span> in USDC or ETH.
+                <br className="hidden md:block" />
+                No subscriptions. No signups. Just revenue.
               </p>
             </div>
 
@@ -89,18 +90,18 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
               <FeatureCard
                 icon={<Zap className="w-6 h-6 text-yellow-500 dark:text-yellow-400" />}
-                title="Instant Payments"
-                description="Receive USDC or ETH directly to your wallet."
+                title="Instant Payouts"
+                description="Forget monthly wait times. Funds hit your wallet the second a sale is made."
               />
               <FeatureCard
                 icon={<Shield className="w-6 h-6 text-green-500 dark:text-green-400" />}
-                title="Secure Access"
-                description="Content is encrypted and only revealed after payment."
+                title="Ironclad Security"
+                description="Your content is encrypted. Only verified buyers can unlock access."
               />
               <FeatureCard
                 icon={<Globe className="w-6 h-6 text-blue-500 dark:text-blue-400" />}
-                title="Global Reach"
-                description="Share your link anywhere. Anyone can pay."
+                title="Sell Globally"
+                description="Reach customers anywhere in the world. No banking borders."
               />
             </div>
 
@@ -110,29 +111,29 @@ export default function Home() {
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 text-left">
                 <UseCaseCard
                   icon="🎓"
-                  title="Courses"
-                  description="Sell access to tutorials, video guides, and educational content."
+                  title="Sell Courses"
+                  description="Monetize your expertise. Lock tutorials, guides, and workshops."
                 />
                 <UseCaseCard
                   icon="🎨"
-                  title="Digital Art"
-                  description="Monetize presets, templates, e-books, and design assets."
+                  title="Digital Assets"
+                  description="Sell presets, templates, art, or e-books directly to fans."
                 />
                 <UseCaseCard
                   icon="💬"
-                  title="Community"
-                  description="Paid invite links for Discord, Telegram, or Slack communities."
+                  title="Gate Communities"
+                  description="Create paid invite links for your Discord, Telegram, or Slack."
                 />
                 <UseCaseCard
                   icon="🔑"
-                  title="Access Keys"
-                  description="Sell software licenses, API keys, or passwords securely."
+                  title="Sell Access"
+                  description="Monetize API keys, software licenses, or exclusive passwords."
                 />
               </div>
             </div>
 
             <div className="pt-4">
-              <p className="text-sm text-muted-foreground mb-4">Connect your wallet to get started</p>
+              <p className="text-sm text-muted-foreground mb-4">Connect your wallet to start earning</p>
             </div>
           </div>
         ) : createdLink ? (
