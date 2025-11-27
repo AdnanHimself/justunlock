@@ -346,7 +346,22 @@ export default function UnlockPage() {
         </div>
     );
 
-    if (!linkData) return <div className="min-h-screen bg-background flex items-center justify-center text-foreground">Link not found</div>;
+    if (!linkData) return (
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 text-center space-y-6">
+            <div className="p-4 bg-secondary/30 rounded-full">
+                <AlertCircle className="w-12 h-12 text-muted-foreground" />
+            </div>
+            <div className="space-y-2">
+                <h1 className="text-2xl font-bold text-foreground">Link Expired or Not Found</h1>
+                <p className="text-muted-foreground max-w-sm mx-auto">
+                    The link you are trying to access has been deleted by the creator or does not exist.
+                </p>
+            </div>
+            <Button onClick={() => window.location.href = '/'}>
+                Create your own link
+            </Button>
+        </div>
+    );
 
     const priceInUnits = parseUnits(linkData.price.toString(), 6);
     const hasAllowance = allowance ? allowance >= priceInUnits : false;

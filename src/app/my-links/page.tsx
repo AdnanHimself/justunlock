@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAccount } from 'wagmi';
-import { Loader2, ExternalLink, Copy, Check, ChevronDown, ChevronUp, DollarSign, Calendar } from 'lucide-react';
+import { Loader2, ExternalLink, Copy, Check, ChevronDown, ChevronUp, DollarSign, Calendar, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -99,6 +99,29 @@ export default function MyLinksPage() {
         }
     };
 
+    const handleDelete = async (linkId: string) => {
+        if (!window.confirm('Are you sure you want to delete this link? This action cannot be undone.')) {
+            return;
+        }
+
+        try {
+            const { error } = await supabase
+                .from('links')
+                .delete()
+                .eq('id', linkId);
+
+            if (error) throw error;
+
+            setLinks(links.filter(link => link.id !== linkId));
+            if (expandedLinkId === linkId) {
+                setExpandedLinkId(null);
+            }
+        } catch (error) {
+            console.error('Error deleting link:', error);
+            alert('Failed to delete link. Please try again.');
+        }
+    };
+
     if (!isConnected) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
@@ -180,6 +203,13 @@ export default function MyLinksPage() {
                                             ) : (
                                                 <ChevronDown className="w-5 h-5 text-muted-foreground" />
                                             )}
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(link.id)}
+                                            className="p-2 hover:bg-red-500/10 text-muted-foreground hover:text-red-500 rounded-lg transition-colors"
+                                            title="Delete Link"
+                                        >
+                                            <Trash2 className="w-5 h-5" />
                                         </button>
                                     </div>
                                 </div>
