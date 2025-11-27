@@ -65,17 +65,48 @@ export default function Home() {
   return (
     <main className="min-h-[calc(100vh-7rem)] flex flex-col items-center justify-center p-4 bg-background text-foreground transition-colors">
       <div className="w-full max-w-md space-y-8">
-        <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center p-3 bg-blue-600 rounded-2xl mb-4">
-            <Lock className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight">BaseLock</h1>
-          <p className="text-muted-foreground">Monetize your links on Base L2.</p>
-        </div>
-
         {!isConnected ? (
-          <div className="flex justify-center">
-            <ConnectButton />
+          <div className="text-center space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="space-y-4">
+              <div className="inline-flex items-center justify-center p-4 bg-blue-600/10 dark:bg-blue-600/20 rounded-3xl mb-2">
+                <Lock className="w-12 h-12 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                BaseLock
+              </h1>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Monetize your content on Base.<br />
+                Secure, simple, and decentralized.
+              </p>
+            </div>
+
+            <div className="grid gap-4 text-left">
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-secondary/30 border border-border/50">
+                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
+                  <LinkIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Create a Lock</h3>
+                  <p className="text-sm text-muted-foreground">Paste any URL and set a price in USDC.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-secondary/30 border border-border/50">
+                <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400">
+                  <Copy className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Share & Earn</h3>
+                  <p className="text-sm text-muted-foreground">Share the link. Get paid instantly when users unlock it.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <p className="text-sm text-muted-foreground mb-4">Connect your wallet to get started</p>
+              {/* Connect Button is in Navbar, but we can add a visual cue or arrow pointing up if needed, 
+                  or just rely on the Navbar button which is standard web3 pattern. 
+                  For now, we keep the UI clean. */}
+            </div>
           </div>
         ) : createdLink ? (
           <div className="bg-card border border-border rounded-2xl p-6 shadow-xl space-y-4 animate-in fade-in zoom-in duration-300">
@@ -112,63 +143,65 @@ export default function Home() {
             </Button>
           </div>
         ) : (
-          <form onSubmit={handleCreate} className="bg-card border border-border rounded-2xl p-6 space-y-6 shadow-sm">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Target URL</label>
-              <input
-                type="url"
-                placeholder="https://..."
-                value={targetUrl}
-                onChange={(e) => setTargetUrl(e.target.value)}
-                className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
-                required
-              />
-              <p className="text-xs text-muted-foreground">The secret content users pay to see.</p>
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h1 className="text-3xl font-bold tracking-tight">Create Lock</h1>
+              <p className="text-muted-foreground">Set a price for your secret content.</p>
             </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Title</label>
-              <input
-                type="text"
-                placeholder="e.g. Exclusive Report"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Price (USDC)</label>
-              <div className="relative">
+            <form onSubmit={handleCreate} className="bg-card border border-border rounded-2xl p-6 space-y-6 shadow-sm">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Target URL</label>
                 <input
-                  type="number"
-                  step="0.01"
-                  min="0.1"
-                  placeholder="0.00"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                  className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 pl-12 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
+                  type="url"
+                  placeholder="https://..."
+                  value={targetUrl}
+                  onChange={(e) => setTargetUrl(e.target.value)}
+                  className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
                   required
                 />
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                <p className="text-xs text-muted-foreground">The secret content users pay to see.</p>
               </div>
-              <p className="text-xs text-muted-foreground">Minimum 0.1 USDC. 1% platform fee applies.</p>
-            </div>
 
-            <Button
-              type="submit"
-              isLoading={loading}
-              disabled={loading}
-            >
-              Create Locked Link
-            </Button>
-          </form>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Title</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Exclusive Report"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Price (USDC)</label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0.1"
+                    placeholder="0.00"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 pl-12 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
+                    required
+                  />
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                </div>
+                <p className="text-xs text-muted-foreground">Minimum 0.1 USDC. 1% platform fee applies.</p>
+              </div>
+
+              <Button
+                type="submit"
+                isLoading={loading}
+                disabled={loading}
+              >
+                Create Locked Link
+              </Button>
+            </form>
+          </div>
         )}
-
-        <div className="flex justify-center">
-          <ConnectButton showBalance={false} />
-        </div>
       </div>
     </main>
   );
