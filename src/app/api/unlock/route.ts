@@ -73,23 +73,6 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        if (!isVerified) {
-            // return NextResponse.json({ error: 'Invalid transaction for this contract' }, { status: 400 });
-            // For now, let's be lenient while we debug the exact event signature matching.
-        }
-
-        // 2. Fetch Secret URL from Supabase (using Admin Client)
-        const { data, error } = await supabaseAdmin
-            .from('links')
-            .select('target_url')
-            .eq('id', linkId)
-            .single();
-
-        if (error || !data) {
-            return NextResponse.json({ error: 'Link not found' }, { status: 404 });
-        }
-
-        return NextResponse.json({ targetUrl: data.target_url });
 
     } catch (error) {
         console.error('Unlock API Error:', error);

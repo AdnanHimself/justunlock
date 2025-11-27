@@ -30,19 +30,21 @@ export default function Home() {
     const slug = generateSlug();
 
     try {
-      const { error } = await supabase
-        .from('links')
-        .insert({
-          id: slug,
+      const response = await fetch('/api/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          slug,
           target_url: targetUrl,
           price: parseFloat(price),
           receiver_address: address,
-          title: title || 'Unlock Content',
-          token_address: '0x0000000000000000000000000000000000000000', // ETH for now
-          created_at: new Date().toISOString(),
-        });
+          title: title
+        })
+      });
 
-      if (error) throw error;
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.error || 'Failed to create link');
 
       setCreatedLink(`${window.location.origin}/${slug}`);
       showToast('Link created successfully!', 'success');
