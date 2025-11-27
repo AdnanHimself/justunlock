@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createPublicClient, http, parseAbiItem, decodeEventLog, keccak256, toBytes, parseUnits, verifyMessage } from 'viem';
 import { base } from 'viem/chains';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import { getEthPrice } from '@/lib/price';
 
 // Initialize Viem Public Client for Base Mainnet
 const publicClient = createPublicClient({
@@ -100,18 +101,29 @@ export async function POST(req: NextRequest) {
                                 console.error(`Insufficient USDC payment. Paid: ${args.amount}, Required: ${requiredAmount}`);
                                 continue;
                             }
+
+
+                            // ... existing imports ...
+
+                            // ... inside POST function ...
+
                         } else if (args.token === ZERO_ADDRESS) {
                             // ETH Payment (Native)
-                            // Hardcoded rate: 1 USDC = 0.0003 ETH
-                            const ethRate = 0.0003;
+                            // Fetch live price
+                            const ethPrice = await getEthPrice();
                             const priceVal = parseFloat(link.price.toString());
-                            const requiredETH = parseUnits((priceVal * ethRate).toFixed(18), 18);
 
-                            // 1% tolerance
-                            const tolerance = (requiredETH * BigInt(99)) / BigInt(100);
+                            // Calculate required ETH: (Price in USDC) / (ETH Price in USD)
+                            // e.g. 1 USDC / 3000 = 0.000333 ETH
+                            const requiredEthAmount = priceVal / ethPrice;
+
+                            const requiredETH = parseUnits(requiredEthAmount.toFixed(18), 18);
+
+                            // 2% tolerance for price fluctuations between UI and Tx
+                            const tolerance = (requiredETH * BigInt(98)) / BigInt(100);
 
                             if (args.amount < tolerance) {
-                                console.error(`Insufficient ETH payment. Paid: ${args.amount}, Required: ~${requiredETH}`);
+                                console.error(`Insufficient ETH payment. Paid: ${args.amount}, Required: ~${requiredETH} (Price: ${ethPrice})`);
                                 continue;
                             }
                         } else {
@@ -164,6 +176,25 @@ export async function POST(req: NextRequest) {
         // Re-fetch to get latest count? No, let's just use what we have or do a blind update if possible.
         // Supabase JS client doesn't support "increment" directly in update().
         // Let's just update last_purchased_at for now and try to increment sales_count based on current known value.
+
+        // 5. Record Purchase and Update Stats
+        const { error: purchaseError } = await supabaseAdmin
+            .from('purchases')
+            .insert({
+                link_id: linkId,
+                buyer_address: userAddress,
+                amount: parseFloat(link.price.toString()), // Storing as USDC value for consistency in stats
+                token_address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // Defaulting to USDC for now as price is in USDC. 
+                // TODO: If we support ETH payments properly, we should store the actual token and amount paid.
+                // But since our price is denominated in USDC, and we verify against that, let's store the USDC value for simpler stats.
+                // Actually, let's store the REAL transaction hash to ensure uniqueness.
+                transaction_hash: txHash
+            });
+
+        if (purchaseError) {
+            console.error('Error recording purchase:', purchaseError);
+            // Don't fail the request if just recording stats fails, but log it.
+        }
 
         await supabaseAdmin
             .from('links')

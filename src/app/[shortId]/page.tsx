@@ -99,6 +99,22 @@ export default function UnlockPage() {
     // V2 Features
     const [paymentMethod, setPaymentMethod] = useState<'USDC' | 'ETH'>('USDC');
     const [tipAmount, setTipAmount] = useState('');
+    const [ethPrice, setEthPrice] = useState<number | null>(null);
+
+    useEffect(() => {
+        // Fetch ETH price
+        const fetchPrice = async () => {
+            try {
+                const response = await fetch('https://api.coinbase.com/v2/prices/ETH-USD/spot');
+                const data = await response.json();
+                setEthPrice(parseFloat(data.data.amount));
+            } catch (e) {
+                console.error('Failed to fetch ETH price', e);
+                setEthPrice(3000); // Fallback
+            }
+        };
+        fetchPrice();
+    }, []);
 
     const { data: hash, writeContract, isPending, error: writeError } = useWriteContract();
     const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
@@ -409,30 +425,12 @@ export default function UnlockPage() {
                         <div className="flex justify-between items-center text-sm text-muted-foreground bg-secondary/20 p-4 rounded-xl border border-border/50">
                             <span>Price</span>
                             <span className="text-foreground font-bold text-2xl text-primary">
-                                {paymentMethod === 'USDC' ? `${linkData.price} USDC` : `~${(parseFloat(linkData.price) * 0.0003).toFixed(4)} ETH`}
+                                {paymentMethod === 'USDC'
+                                    ? `${linkData.price} USDC`
+                                    : ethPrice
+                                        ? `~${(parseFloat(linkData.price) / ethPrice).toFixed(5)} ETH`
+                                        : 'Loading...'}
                             </span>
-                        </div>
-
-                        {/* Tipping */}
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                                Add a Tip
-                                <span className="text-xs font-normal bg-secondary px-2 py-0.5 rounded-full text-muted-foreground/70">Optional</span>
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type="number"
-                                    min="0"
-                                    step="0.1"
-                                    placeholder="0.00"
-                                    value={tipAmount}
-                                    onChange={(e) => setTipAmount(e.target.value)}
-                                    className="w-full bg-input/10 border border-input rounded-lg px-4 py-2 focus:outline-none focus:border-primary transition-colors text-foreground"
-                                />
-                                <span className="absolute right-4 top-2 text-muted-foreground text-sm">
-                                    {paymentMethod}
-                                </span>
-                            </div>
                         </div>
 
                         {paymentMethod === 'USDC' && !hasBalance && (
@@ -484,6 +482,6 @@ export default function UnlockPage() {
                     </div>
                 )}
             </div>
-        </main>
+        </main >
     );
 }
