@@ -191,7 +191,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Title</label>
+                <label className="text-sm font-medium text-foreground">Link Title</label>
                 <input
                   type="text"
                   placeholder="e.g. Exclusive Report"
@@ -204,20 +204,28 @@ export default function Home() {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Price (USDC)</label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    step="0.01"
-                    min="1"
-                    placeholder="0.00"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 pl-12 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
-                    required
-                  />
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                <div className="flex gap-4 items-start">
+                  <div className="relative flex-1">
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="1"
+                      placeholder="0.00"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 pl-12 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
+                      required
+                    />
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                  </div>
+                  <div className="hidden md:block p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-xs text-blue-600 dark:text-blue-400 max-w-[200px]">
+                    <p><strong>Note:</strong> You set the price in USDC, but buyers can pay with <strong>ETH</strong> (auto-converted).</p>
+                  </div>
                 </div>
-                <p className="text-xs text-muted-foreground">Minimum 1 USDC. 1% platform fee applies.</p>
+                <p className="text-xs text-muted-foreground md:hidden mt-1">
+                  Buyers can also pay with ETH (auto-converted).
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">Minimum 1 USDC. 1% platform fee applies.</p>
               </div>
 
               <Button
