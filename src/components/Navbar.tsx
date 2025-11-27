@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { twMerge } from 'tailwind-merge';
 import { useTheme } from 'next-themes';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Lock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { useAccount } from 'wagmi';
@@ -31,7 +31,10 @@ export function Navbar() {
         <nav className="w-full border-b border-border bg-background transition-colors duration-300 sticky top-0 z-50 backdrop-blur-md bg-background/80">
             <div className="px-4 md:px-6 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-4 md:gap-8 overflow-hidden">
-                    <Link href="/" className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent shrink-0">
+                    <Link href="/" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors shrink-0">
+                        <div className="p-1.5 bg-primary/10 rounded-lg">
+                            <Lock className="w-5 h-5 text-primary" />
+                        </div>
                         BaseLock
                     </Link>
 

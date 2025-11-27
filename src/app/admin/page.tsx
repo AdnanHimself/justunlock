@@ -165,15 +165,7 @@ function OverviewTab() {
                 <StatCard label="Total Volume" value="Loading..." />
                 <StatCard label="Active Users" value="Loading..." />
             </div>
-            <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl flex items-start gap-3">
-                <ShieldAlert className="w-6 h-6 text-yellow-500 shrink-0" />
-                <div>
-                    <h3 className="font-bold text-yellow-500">Action Required</h3>
-                    <p className="text-sm text-yellow-200/80">
-                        Please deploy the <strong>BaseLockV2</strong> contract and update the address in the admin dashboard code.
-                    </p>
-                </div>
-            </div>
+
         </div>
     );
 }

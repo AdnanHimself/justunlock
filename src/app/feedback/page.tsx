@@ -71,7 +71,7 @@ export default function FeedbackPage() {
                         <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-foreground appearance-none"
+                            className="w-full bg-card border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-foreground appearance-none"
                         >
                             <option value="general">General Feedback</option>
                             <option value="bug">Report a Bug</option>
