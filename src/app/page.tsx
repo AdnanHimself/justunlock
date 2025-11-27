@@ -103,7 +103,33 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-8 space-y-6">
+              <h2 className="text-2xl font-bold text-center">What can you lock?</h2>
+              <div className="grid gap-4 md:grid-cols-2 text-left">
+                <UseCaseCard
+                  icon="🎓"
+                  title="Courses & Tutorials"
+                  description="Sell access to your expert knowledge, video guides, or workshops."
+                />
+                <UseCaseCard
+                  icon="🎨"
+                  title="Digital Art & Assets"
+                  description="Monetize presets, templates, e-books, or exclusive artwork."
+                />
+                <UseCaseCard
+                  icon="💬"
+                  title="Community Access"
+                  description="Paid invite links for Discord servers, Telegram groups, or Slack."
+                />
+                <UseCaseCard
+                  icon="🔑"
+                  title="Secret Codes"
+                  description="Sell game keys, passwords, or access tokens securely."
+                />
+              </div>
+            </div>
+
+            <div className="pt-8">
               <p className="text-sm text-muted-foreground mb-4">Connect your wallet to get started</p>
             </div>
           </div>
@@ -203,5 +229,15 @@ export default function Home() {
         )}
       </div>
     </main>
+  );
+}
+
+function UseCaseCard({ icon, title, description }: { icon: string, title: string, description: string }) {
+  return (
+    <div className="p-4 rounded-xl bg-secondary/20 border border-border/50 hover:bg-secondary/40 transition-colors">
+      <div className="text-2xl mb-2">{icon}</div>
+      <h3 className="font-semibold mb-1">{title}</h3>
+      <p className="text-sm text-muted-foreground">{description}</p>
+    </div>
   );
 }
