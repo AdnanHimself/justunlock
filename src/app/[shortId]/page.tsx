@@ -347,6 +347,20 @@ export default function UnlockPage() {
                     <p className="text-muted-foreground">
                         {hasAccess ? "You have access to this content." : `Pay ${linkData.price} USDC to unlock.`}
                     </p>
+
+                    {/* Creator Verification */}
+                    <div className="flex items-center justify-center gap-2 text-sm">
+                        <span className="text-muted-foreground">Created by:</span>
+                        <a
+                            href={`https://basescan.org/address/${linkData.receiver_address}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 text-blue-500 hover:text-blue-400 transition-colors font-mono bg-blue-500/10 px-2 py-1 rounded-md"
+                        >
+                            {linkData.receiver_address.slice(0, 6)}...{linkData.receiver_address.slice(-4)}
+                            <CheckCircle2 className="w-3 h-3" />
+                        </a>
+                    </div>
                 </div>
 
                 {!isConnected ? (
