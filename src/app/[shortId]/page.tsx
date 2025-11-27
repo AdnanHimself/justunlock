@@ -118,18 +118,14 @@ export default function UnlockPage() {
         }
     }, [isConnected, address, linkData, isSuccess]);
 
-    // Refetch allowance after transaction success (likely an approval)
-    useEffect(() => {
-        if (isSuccess) {
-            refetchAllowance();
-        }
-    }, [isSuccess, refetchAllowance]);
+    // Refetch allowance logic moved to the main success effect
 
     const fetchLinkData = async () => {
         try {
+            // Only fetch public metadata, NOT the target_url
             const { data, error } = await supabase
                 .from('links')
-                .select('*')
+                .select('id, title, price, receiver_address, created_at') // Exclude target_url
                 .eq('id', shortId)
                 .single();
 
@@ -140,6 +136,31 @@ export default function UnlockPage() {
             showToast('Failed to load link data', 'error');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const unlockContent = async (txHash: string) => {
+        try {
+            const response = await fetch('/api/unlock', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    linkId: shortId,
+                    txHash: txHash,
+                    userAddress: address
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) throw new Error(data.error || 'Failed to unlock');
+
+            setLinkData((prev: any) => ({ ...prev, target_url: data.targetUrl }));
+            setHasAccess(true);
+            showToast('Content unlocked!', 'success');
+        } catch (err) {
+            console.error('Unlock error:', err);
+            showToast('Failed to verify payment. Please try again.', 'error');
         }
     };
 
@@ -168,7 +189,9 @@ export default function UnlockPage() {
             });
 
             if (logs.length > 0) {
-                setHasAccess(true);
+                // Found a past payment! Use its hash to unlock.
+                const txHash = logs[0].transactionHash;
+                await unlockContent(txHash);
             }
         } catch (err) {
             console.error('Error checking access:', err);
@@ -176,6 +199,14 @@ export default function UnlockPage() {
             setCheckingAccess(false);
         }
     };
+
+    // Watch for successful payment transaction
+    useEffect(() => {
+        if (isSuccess && hash) {
+            refetchAllowance();
+            unlockContent(hash);
+        }
+    }, [isSuccess, hash, refetchAllowance]);
 
     const handleApprove = () => {
         if (!linkData) return;
