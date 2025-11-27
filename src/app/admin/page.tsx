@@ -3,13 +3,39 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
-import { useAccount } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract } from 'wagmi';
 import { Wallet, Users, MessageSquare, Settings, ShieldAlert, Loader2, DollarSign, Activity } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { formatDistanceToNow } from 'date-fns';
 
 // Placeholder for V2 Contract Address - User needs to update this after deployment
 const CONTRACT_ADDRESS_V2 = '0x5CB532D8799b36a6E5dfa1663b6cFDDdDB431405';
+
+const BASELOCK_V2_ABI = [
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "_newFee", "type": "uint256" }
+        ],
+        "name": "setFee",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "feeBasisPoints",
+        "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+        "stateMutability": "view",
+        "type": "function"
+    }
+] as const;
 
 export default function AdminDashboard() {
     const { address, isConnected } = useAccount();
@@ -285,6 +311,57 @@ function SalesTab({ supabase }: { supabase: any }) {
 }
 
 function FeesTab() {
+    const { address } = useAccount();
+    const [newFee, setNewFee] = useState('');
+    const [isUpdating, setIsUpdating] = useState(false);
+
+    const { data: currentFee, refetch: refetchFee } = useReadContract({
+        address: CONTRACT_ADDRESS_V2,
+        abi: BASELOCK_V2_ABI,
+        functionName: 'feeBasisPoints',
+    });
+
+    const { data: ownerAddress } = useReadContract({
+        address: CONTRACT_ADDRESS_V2,
+        abi: BASELOCK_V2_ABI,
+        functionName: 'owner',
+    });
+
+    const { writeContract, isPending, isSuccess } = useWriteContract();
+
+    useEffect(() => {
+        if (isSuccess) {
+            setIsUpdating(false);
+            setNewFee('');
+            refetchFee();
+            alert('Fee updated successfully!');
+        }
+    }, [isSuccess, refetchFee]);
+
+    const handleUpdateFee = () => {
+        if (!newFee) return;
+        const feeValue = parseInt(newFee);
+        if (isNaN(feeValue) || feeValue < 0 || feeValue > 500) {
+            alert('Invalid fee. Must be between 0 and 500 (5%).');
+            return;
+        }
+
+        setIsUpdating(true);
+        try {
+            writeContract({
+                address: CONTRACT_ADDRESS_V2,
+                abi: BASELOCK_V2_ABI,
+                functionName: 'setFee',
+                args: [BigInt(feeValue)],
+            });
+        } catch (error) {
+            console.error('Error updating fee:', error);
+            setIsUpdating(false);
+        }
+    };
+
+    const isOwner = address && ownerAddress && address.toLowerCase() === ownerAddress.toLowerCase();
+
     return (
         <div className="space-y-6">
             <h2 className="text-2xl font-bold">Fees & Contract Settings</h2>
@@ -294,7 +371,9 @@ function FeesTab() {
                         <h3 className="font-semibold text-foreground">Platform Fee</h3>
                         <p className="text-sm text-muted-foreground">Current fee percentage taken from each transaction.</p>
                     </div>
-                    <span className="text-2xl font-bold text-foreground">1.0%</span>
+                    <span className="text-2xl font-bold text-foreground">
+                        {currentFee ? (Number(currentFee) / 100).toFixed(2) : '...'}%
+                    </span>
                 </div>
                 <div className="h-px bg-border" />
                 <div className="flex justify-between items-center">
@@ -308,14 +387,52 @@ function FeesTab() {
                 </div>
             </div>
 
-            <div className="bg-yellow-500/10 p-4 rounded-xl border border-yellow-500/20">
-                <h3 className="font-semibold text-yellow-500 mb-2 flex items-center gap-2">
-                    <Settings className="w-4 h-4" /> Admin Controls
+            <div className="bg-card p-6 rounded-xl border border-border space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                    <Settings className="w-4 h-4" /> Update Fee
                 </h3>
-                <p className="text-sm text-yellow-500/80 mb-4">
-                    To update fees, you must use the <code>setFee</code> function on the smart contract directly via Etherscan or a wallet interface.
-                    Updates the <code>feeBasisPoints</code> on the smart contract. Max 5%.
-                </p>
+
+                {!isOwner ? (
+                    <div className="bg-yellow-500/10 p-4 rounded-xl border border-yellow-500/20 text-yellow-500 text-sm">
+                        Only the contract owner can update fees.
+                    </div>
+                ) : (
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-muted-foreground">Select New Fee</label>
+                            <div className="flex flex-wrap gap-3">
+                                {[1, 2, 3, 4, 5].map((percent) => {
+                                    const basisPoints = (percent * 100).toString();
+                                    const isSelected = newFee === basisPoints;
+                                    return (
+                                        <button
+                                            key={percent}
+                                            onClick={() => setNewFee(basisPoints)}
+                                            className={cn(
+                                                "flex-1 min-w-[80px] py-3 rounded-xl border transition-all font-medium text-sm",
+                                                isSelected
+                                                    ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                                                    : "bg-background hover:bg-secondary border-border text-muted-foreground hover:text-foreground"
+                                            )}
+                                        >
+                                            {percent}%
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="flex justify-end">
+                            <button
+                                onClick={handleUpdateFee}
+                                disabled={isPending || isUpdating || !newFee}
+                                className="px-6 py-2 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {isPending || isUpdating ? 'Updating Fee...' : 'Update Fee'}
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -497,6 +497,6 @@ export default function UnlockPage() {
                     </div>
                 )}
             </div>
-        </main >
+        </main>
     );
 }
