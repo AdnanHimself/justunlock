@@ -124,12 +124,7 @@ export default function AdminDashboard() {
                             icon={<LinkIcon className="w-4 h-4 md:w-5 md:h-5" />}
                             label="All Links"
                         />
-                        <TabButton
-                            active={activeTab === 'users'}
-                            onClick={() => setActiveTab('users')}
-                            icon={<Users className="w-4 h-4 md:w-5 md:h-5" />}
-                            label="User Roles"
-                        />
+
                     </nav>
 
                     {/* Content */}
@@ -139,7 +134,7 @@ export default function AdminDashboard() {
                         {activeTab === 'fees' && <FeesTab />}
                         {activeTab === 'feedback' && <FeedbackTab supabase={supabase} />}
                         {activeTab === 'links' && <LinksTab supabase={supabase} />}
-                        {activeTab === 'users' && <UsersTab />}
+
                     </main>
                 </div>
             </div>
@@ -603,14 +598,4 @@ function FeedbackTab({ supabase }: any) {
     );
 }
 
-function UsersTab() {
-    // Placeholder for user management
-    return (
-        <div className="space-y-6">
-            <h2 className="text-2xl font-bold">User Roles</h2>
-            <p className="text-muted-foreground">
-                Manage user roles and permissions here. (Requires <code>profiles</code> table population).
-            </p>
-        </div>
-    );
-}
+
