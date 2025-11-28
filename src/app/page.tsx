@@ -2,13 +2,24 @@
 'use client';
 
 import { useState } from 'react';
-import { useAccount, useSignMessage } from 'wagmi';
+import { useAccount, useSignMessage, useReadContract } from 'wagmi';
 import { Link as LinkIcon, Copy, Upload, Check, Zap, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useToast } from '@/components/ui/Toast';
 import { UseCaseCard } from "@/components/UseCaseCard";
 
 import Link from 'next/link';
+
+// V3 Contract Address
+const CONTRACT_ADDRESS = '0xD2F2964Ac4665B539e7De9Dc3B14b1A8173c02E0';
+
+const FEE_ABI = [{
+  inputs: [],
+  name: "feeBasisPoints",
+  outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+  stateMutability: "view",
+  type: "function"
+}] as const;
 
 export default function Home() {
   const { address, isConnected } = useAccount();
@@ -22,6 +33,15 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [createdLink, setCreatedLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+
+  // Read fee from contract
+  const { data: feeBasisPoints } = useReadContract({
+    address: CONTRACT_ADDRESS,
+    abi: FEE_ABI,
+    functionName: 'feeBasisPoints',
+  });
+
+  const feePercentage = feeBasisPoints ? Number(feeBasisPoints) / 100 : 1;
 
   const generateSlug = () => {
     return Math.random().toString(36).substring(2, 8);
@@ -384,7 +404,7 @@ export default function Home() {
                 <p className="text-xs text-muted-foreground md:hidden mt-1">
                   Buyers can also pay with ETH (auto-converted).
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">Min 1 USDC. Max 10,000 USDC. 1% platform fee applies.</p>
+                <p className="text-xs text-muted-foreground mt-1">Min 1 USDC. Max 10,000 USDC. {feePercentage}% platform fee applies.</p>
               </div>
 
               <Button
