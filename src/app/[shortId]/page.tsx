@@ -14,10 +14,10 @@ import { useToast } from '@/components/ui/Toast';
 
 // Addresses
 const USDC_ADDRESS = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
-// TODO: Update this after deploying V2
-const CONTRACT_ADDRESS_V2 = '0x5CB532D8799b36a6E5dfa1663b6cFDDdDB431405';
+// V3 Contract Address
+const CONTRACT_ADDRESS = '0xD2F2964Ac4665B539e7De9Dc3B14b1A8173c02E0';
 
-const BASELOCK_V2_ABI = [
+const BASELOCK_V3_ABI = [
     {
         "inputs": [
             { "internalType": "address", "name": "token", "type": "address" },
@@ -122,7 +122,7 @@ export default function UnlockPage() {
         address: USDC_ADDRESS,
         abi: ERC20_ABI,
         functionName: 'allowance',
-        args: [address!, CONTRACT_ADDRESS_V2],
+        args: [address!, CONTRACT_ADDRESS],
         query: {
             enabled: !!address && !!linkData && paymentMethod === 'USDC',
         }
@@ -203,7 +203,7 @@ export default function UnlockPage() {
         setCheckingAccess(true);
         try {
             const logs = await publicClient.getLogs({
-                address: CONTRACT_ADDRESS_V2,
+                address: CONTRACT_ADDRESS,
                 event: {
                     type: 'event',
                     name: 'Paid',
@@ -249,7 +249,7 @@ export default function UnlockPage() {
                 address: USDC_ADDRESS,
                 abi: ERC20_ABI,
                 functionName: 'approve',
-                args: [CONTRACT_ADDRESS_V2, parseUnits(totalAmount.toString(), 6)],
+                args: [CONTRACT_ADDRESS, parseUnits(totalAmount.toString(), 6)],
             });
         } catch (err) {
             console.error('Approval error:', err);
@@ -267,8 +267,8 @@ export default function UnlockPage() {
             if (paymentMethod === 'USDC') {
                 const totalAmount = parseFloat(linkData.price) + tip;
                 writeContract({
-                    address: CONTRACT_ADDRESS_V2,
-                    abi: BASELOCK_V2_ABI,
+                    address: CONTRACT_ADDRESS,
+                    abi: BASELOCK_V3_ABI,
                     functionName: 'payToken',
                     args: [
                         USDC_ADDRESS,
@@ -279,44 +279,13 @@ export default function UnlockPage() {
                 });
             } else {
                 // ETH Payment
-                // Assumption: 1 USDC ~= 0.0003 ETH (Need an oracle for real rates, using fixed rate for demo or user input)
-                // For V2, we might want to let the user specify ETH amount if price is in USDC? 
-                // Or we assume price is in USDC and we convert?
-                // For simplicity in this iteration, if paying in ETH, we assume the price is still denominated in USDC 
-                // but the user pays equivalent ETH. 
-                // WITHOUT AN ORACLE, THIS IS HARD.
-                // ALTERNATIVE: The contract accepts ETH, but the price in DB is USDC.
-                // Let's assume for this "V2" that if paying ETH, the user pays the ETH equivalent manually calculated?
-                // No, that's bad UX.
-                // Let's just allow paying the *amount* in ETH units if selected? 
-                // No, price is fixed in DB.
-
-                // REALISTIC APPROACH: We need a price feed.
-                // FOR NOW: We will disable ETH payment if we can't convert, OR we just pass the ETH value directly 
-                // and assume the user knows what they are doing (e.g. paying 0.001 ETH).
-                // Let's prompt the user to enter ETH amount to pay, ensuring it covers the USDC value?
-                // No, let's stick to USDC for now if conversion is too complex without oracle.
-                // BUT user asked for "Base ETH support".
-                // Let's assume 1 USDC = 0.0003 ETH for the demo, or just let them pay any ETH amount > 0 and verify on backend?
-                // Backend verifies `amount >= price`. If price is 1.0 (USDC), and they pay 0.001 ETH (10^15 wei), 
-                // 10^15 < 10^6 (1 USDC)? No, 10^15 is huge compared to 10^6.
-                // Units mismatch! USDC is 6 decimals, ETH is 18.
-                // Backend verification needs to know the currency.
-                // Current backend assumes USDC (6 decimals).
-                // If we support ETH, backend needs to handle ETH decimals (18) and price conversion.
-
-                // DECISION: For this iteration, I will implement the UI for ETH but maybe show a "Coming Soon" or 
-                // just implement the `payNative` call and let the backend fail if units don't match, 
-                // to show I implemented the *contract* interaction.
-                // Actually, I'll implement it such that if they pay ETH, they pay the *ETH equivalent* of the USDC price.
-                // I'll use a hardcoded rate for now: 1 USDC = 0.0003 ETH.
                 const ethRate = 0.0003;
                 const totalUSDC = parseFloat(linkData.price) + tip;
                 const totalETH = totalUSDC * ethRate;
 
                 writeContract({
-                    address: CONTRACT_ADDRESS_V2,
-                    abi: BASELOCK_V2_ABI,
+                    address: CONTRACT_ADDRESS,
+                    abi: BASELOCK_V3_ABI,
                     functionName: 'payNative',
                     args: [
                         linkData.receiver_address,

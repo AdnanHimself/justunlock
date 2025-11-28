@@ -7,11 +7,10 @@ import { twMerge } from 'tailwind-merge';
 import { useTheme } from 'next-themes';
 import { Sun, Moon, Lock } from 'lucide-react';
 import { useEffect, useState } from 'react';
-
 import { useAccount, useReadContract } from 'wagmi';
 
-// Placeholder for V2 Contract Address - User needs to update this after deployment
-const CONTRACT_ADDRESS_V2 = '0x5CB532D8799b36a6E5dfa1663b6cFDDdDB431405';
+// V3 Contract Address
+const CONTRACT_ADDRESS = '0xD2F2964Ac4665B539e7De9Dc3B14b1A8173c02E0';
 
 export function Navbar() {
     const pathname = usePathname();
@@ -21,7 +20,7 @@ export function Navbar() {
 
     // Read owner from contract
     const { data: ownerAddress } = useReadContract({
-        address: CONTRACT_ADDRESS_V2,
+        address: CONTRACT_ADDRESS,
         abi: [{
             inputs: [],
             name: "owner",
@@ -33,7 +32,6 @@ export function Navbar() {
     });
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
     }, []);
 
