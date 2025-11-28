@@ -142,13 +142,13 @@ export default function MyLinksPage() {
     }
 
     return (
-        <div className="min-h-screen bg-background p-8">
-            <div className="max-w-4xl mx-auto space-y-8">
+        <div className="min-h-screen bg-background p-4 md:p-8">
+            <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-3xl font-bold text-foreground">My Links</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold text-foreground">My Links</h1>
                     <Link
                         href="/create"
-                        className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                        className="px-3 py-1.5 md:px-4 md:py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm md:text-base"
                     >
                         Create New Link
                     </Link>
@@ -159,13 +159,13 @@ export default function MyLinksPage() {
                         <p className="text-muted-foreground">You haven't created any links yet.</p>
                     </div>
                 ) : (
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                         {links.map((link) => (
                             <div key={link.id} className="bg-card rounded-xl border border-border overflow-hidden transition-all duration-200 hover:border-primary/50">
-                                <div className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div className="p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4">
                                     <div className="space-y-1">
-                                        <h3 className="text-xl font-semibold text-foreground">{link.title}</h3>
-                                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                        <h3 className="text-lg md:text-xl font-semibold text-foreground">{link.title}</h3>
+                                        <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
                                             <span>{link.price} {link.currency}</span>
                                             <span>•</span>
                                             <span>{link.sales_count || 0} sales</span>
@@ -174,69 +174,69 @@ export default function MyLinksPage() {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-2 md:gap-3">
                                         <button
                                             onClick={() => copyToClipboard(`${window.location.origin}/${link.short_id}`, link.id)}
-                                            className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                                            className="p-1.5 md:p-2 hover:bg-secondary rounded-lg transition-colors"
                                             title="Copy Link"
                                         >
                                             {copiedId === link.id ? (
-                                                <Check className="w-5 h-5 text-green-500" />
+                                                <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500" />
                                             ) : (
-                                                <Copy className="w-5 h-5 text-muted-foreground" />
+                                                <Copy className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
                                             )}
                                         </button>
                                         <Link
                                             href={`/${link.short_id}`}
-                                            className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                                            className="p-1.5 md:p-2 hover:bg-secondary rounded-lg transition-colors"
                                             title="View Page"
                                         >
-                                            <ExternalLink className="w-5 h-5 text-muted-foreground" />
+                                            <ExternalLink className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
                                         </Link>
                                         <button
                                             onClick={() => toggleExpand(link.id)}
-                                            className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                                            className="p-1.5 md:p-2 hover:bg-secondary rounded-lg transition-colors"
                                             title="View Details"
                                         >
                                             {expandedLinkId === link.id ? (
-                                                <ChevronUp className="w-5 h-5 text-muted-foreground" />
+                                                <ChevronUp className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
                                             ) : (
-                                                <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                                                <ChevronDown className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
                                             )}
                                         </button>
                                         <button
                                             onClick={() => handleDelete(link.id)}
-                                            className="p-2 hover:bg-red-500/10 text-muted-foreground hover:text-red-500 rounded-lg transition-colors"
+                                            className="p-1.5 md:p-2 hover:bg-red-500/10 text-muted-foreground hover:text-red-500 rounded-lg transition-colors"
                                             title="Delete Link"
                                         >
-                                            <Trash2 className="w-5 h-5" />
+                                            <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
                                         </button>
                                     </div>
                                 </div>
 
                                 {expandedLinkId === link.id && (
-                                    <div className="bg-secondary/10 border-t border-border p-6 animate-in slide-in-from-top-2">
-                                        <h4 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">Recent Sales</h4>
+                                    <div className="bg-secondary/10 border-t border-border p-4 md:p-6 animate-in slide-in-from-top-2">
+                                        <h4 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 md:mb-4 uppercase tracking-wider">Recent Sales</h4>
 
                                         {loadingPurchases ? (
                                             <div className="flex justify-center py-4">
-                                                <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                                                <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin text-muted-foreground" />
                                             </div>
                                         ) : purchases.length === 0 ? (
-                                            <p className="text-sm text-muted-foreground italic">No sales yet.</p>
+                                            <p className="text-xs md:text-sm text-muted-foreground italic">No sales yet.</p>
                                         ) : (
-                                            <div className="space-y-3">
+                                            <div className="space-y-2 md:space-y-3">
                                                 {purchases.map((purchase) => (
-                                                    <div key={purchase.id} className="flex items-center justify-between text-sm bg-background/50 p-3 rounded-lg border border-border/50">
-                                                        <div className="flex items-center gap-3">
-                                                            <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-                                                                <DollarSign className="w-4 h-4" />
+                                                    <div key={purchase.id} className="flex items-center justify-between text-xs md:text-sm bg-background/50 p-2 md:p-3 rounded-lg border border-border/50">
+                                                        <div className="flex items-center gap-2 md:gap-3">
+                                                            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                                                                <DollarSign className="w-3 h-3 md:w-4 md:h-4" />
                                                             </div>
                                                             <div>
                                                                 <p className="font-medium text-foreground">
                                                                     {purchase.buyer_address.slice(0, 6)}...{purchase.buyer_address.slice(-4)}
                                                                 </p>
-                                                                <p className="text-xs text-muted-foreground">
+                                                                <p className="text-[10px] md:text-xs text-muted-foreground">
                                                                     {formatDistanceToNow(new Date(purchase.created_at), { addSuffix: true })}
                                                                 </p>
                                                             </div>
@@ -247,16 +247,16 @@ export default function MyLinksPage() {
                                                                 href={`https://basescan.org/tx/${purchase.transaction_hash}`}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                className="text-xs text-primary hover:underline flex items-center justify-end gap-1"
+                                                                className="text-[10px] md:text-xs text-primary hover:underline flex items-center justify-end gap-1"
                                                             >
                                                                 View Tx <ExternalLink className="w-3 h-3" />
                                                             </a>
                                                         </div>
                                                     </div>
                                                 ))}
-                                                <div className="pt-4 mt-4 border-t border-border flex justify-between items-center">
-                                                    <span className="font-semibold text-foreground">Total Revenue</span>
-                                                    <span className="font-bold text-xl text-green-500">
+                                                <div className="pt-3 md:pt-4 mt-3 md:mt-4 border-t border-border flex justify-between items-center">
+                                                    <span className="font-semibold text-foreground text-sm md:text-base">Total Revenue</span>
+                                                    <span className="font-bold text-lg md:text-xl text-green-500">
                                                         ${purchases.reduce((acc, curr) => acc + curr.amount, 0).toFixed(2)}
                                                     </span>
                                                 </div>

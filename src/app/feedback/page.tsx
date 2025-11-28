@@ -58,20 +58,20 @@ export default function FeedbackPage() {
     }
 
     return (
-        <main className="min-h-[calc(100vh-7rem)] bg-background text-foreground p-8 transition-colors">
-            <div className="max-w-xl mx-auto space-y-8">
+        <main className="min-h-[calc(100vh-7rem)] bg-background text-foreground p-4 md:p-8 transition-colors">
+            <div className="max-w-xl mx-auto space-y-6 md:space-y-8">
                 <div className="space-y-2">
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent">Feedback</h1>
-                    <p className="text-muted-foreground">Found a bug? Have a feature request? Let us know!</p>
+                    <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent">Feedback</h1>
+                    <p className="text-sm md:text-base text-muted-foreground">Found a bug? Have a feature request? Let us know!</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border p-6 rounded-2xl shadow-sm">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 bg-card border border-border p-4 md:p-6 rounded-2xl shadow-sm">
                     <div className="space-y-2">
                         <label className="text-sm font-medium">Category</label>
                         <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="w-full bg-card border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-foreground appearance-none"
+                            className="w-full bg-card border border-input rounded-xl px-3 py-2 md:px-4 md:py-3 focus:outline-none focus:border-primary transition-colors text-foreground appearance-none text-sm md:text-base"
                         >
                             <option value="general">General Feedback</option>
                             <option value="bug">Report a Bug</option>
@@ -86,8 +86,8 @@ export default function FeedbackPage() {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder="Tell us what you think..."
-                            rows={5}
-                            className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground resize-none"
+                            rows={4}
+                            className="w-full bg-input/10 border border-input rounded-xl px-3 py-2 md:px-4 md:py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground resize-none text-sm md:text-base"
                             required
                         />
                     </div>
@@ -99,7 +99,7 @@ export default function FeedbackPage() {
                             value={contact}
                             onChange={(e) => setContact(e.target.value)}
                             placeholder="Email or Discord handle"
-                            className="w-full bg-input/10 border border-input rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground"
+                            className="w-full bg-input/10 border border-input rounded-xl px-3 py-2 md:px-4 md:py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground text-foreground text-sm md:text-base"
                         />
                     </div>
 

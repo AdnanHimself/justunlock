@@ -77,56 +77,56 @@ export default function AdminDashboard() {
     }
 
     return (
-        <div className="min-h-screen bg-background p-8">
-            <div className="max-w-6xl mx-auto space-y-8">
-                <header className="flex items-center justify-between">
+        <div className="min-h-screen bg-background p-4 md:p-8">
+            <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
+                <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
-                        <p className="text-muted-foreground">Manage platform settings and view statistics</p>
+                        <h1 className="text-2xl md:text-3xl font-bold text-foreground">Admin Dashboard</h1>
+                        <p className="text-sm md:text-base text-muted-foreground">Manage platform settings and view statistics</p>
                     </div>
-                    <div className="flex items-center gap-2 px-4 py-2 bg-secondary/50 rounded-full">
+                    <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-secondary/50 rounded-full w-fit">
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-sm font-medium text-foreground">System Operational</span>
+                        <span className="text-xs md:text-sm font-medium text-foreground">System Operational</span>
                     </div>
                 </header>
 
-                <div className="grid grid-cols-12 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
                     {/* Sidebar Navigation */}
-                    <nav className="col-span-3 space-y-2">
+                    <nav className="md:col-span-3 flex md:flex-col overflow-x-auto md:overflow-visible gap-2 pb-2 md:pb-0 no-scrollbar">
                         <TabButton
                             active={activeTab === 'overview'}
                             onClick={() => setActiveTab('overview')}
-                            icon={<Activity className="w-5 h-5" />}
+                            icon={<Activity className="w-4 h-4 md:w-5 md:h-5" />}
                             label="Overview"
                         />
                         <TabButton
                             active={activeTab === 'sales'}
                             onClick={() => setActiveTab('sales')}
-                            icon={<DollarSign className="w-5 h-5" />}
+                            icon={<DollarSign className="w-4 h-4 md:w-5 md:h-5" />}
                             label="Sales & Fees"
                         />
                         <TabButton
                             active={activeTab === 'fees'}
                             onClick={() => setActiveTab('fees')}
-                            icon={<Wallet className="w-5 h-5" />}
+                            icon={<Wallet className="w-4 h-4 md:w-5 md:h-5" />}
                             label="Fees & Contract"
                         />
                         <TabButton
                             active={activeTab === 'feedback'}
                             onClick={() => setActiveTab('feedback')}
-                            icon={<MessageSquare className="w-5 h-5" />}
+                            icon={<MessageSquare className="w-4 h-4 md:w-5 md:h-5" />}
                             label="Feedback"
                         />
                         <TabButton
                             active={activeTab === 'users'}
                             onClick={() => setActiveTab('users')}
-                            icon={<Users className="w-5 h-5" />}
+                            icon={<Users className="w-4 h-4 md:w-5 md:h-5" />}
                             label="User Roles"
                         />
                     </nav>
 
                     {/* Content */}
-                    <main className="col-span-9 bg-card rounded-2xl p-6 border border-border">
+                    <main className="md:col-span-9 bg-card rounded-2xl p-4 md:p-6 border border-border">
                         {activeTab === 'overview' && <OverviewTab supabase={supabase} />}
                         {activeTab === 'sales' && <SalesTab supabase={supabase} />}
                         {activeTab === 'fees' && <FeesTab />}
@@ -144,14 +144,14 @@ function TabButton({ active, onClick, icon, label }: any) {
         <button
             onClick={onClick}
             className={cn(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left",
+                "flex-shrink-0 md:w-full flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all text-left text-sm md:text-base",
                 active
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                    : "hover:bg-secondary text-muted-foreground hover:text-foreground"
+                    : "hover:bg-secondary text-muted-foreground hover:text-foreground bg-secondary/10 md:bg-transparent"
             )}
         >
             {icon}
-            <span className="font-medium">{label}</span>
+            <span className="font-medium whitespace-nowrap">{label}</span>
         </button>
     );
 }

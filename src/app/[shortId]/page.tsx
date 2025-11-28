@@ -368,19 +368,19 @@ export default function UnlockPage() {
     const hasBalance = usdcBalance ? usdcBalance >= priceInUnits : false;
 
     return (
-        <main className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-4">
-            <div className="w-full max-w-md space-y-8">
-                <div className="text-center space-y-4">
-                    <div className="inline-flex items-center justify-center p-4 bg-card rounded-full border border-border shadow-sm">
-                        {hasAccess ? <Unlock className="w-8 h-8 text-green-500" /> : <Lock className="w-8 h-8 text-destructive" />}
+        <main className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-3 md:p-4">
+            <div className="w-full max-w-sm md:max-w-md space-y-6 md:space-y-8">
+                <div className="text-center space-y-3 md:space-y-4">
+                    <div className="inline-flex items-center justify-center p-3 md:p-4 bg-card rounded-full border border-border shadow-sm">
+                        {hasAccess ? <Unlock className="w-6 h-6 md:w-8 md:h-8 text-green-500" /> : <Lock className="w-6 h-6 md:w-8 md:h-8 text-destructive" />}
                     </div>
-                    <h1 className="text-3xl font-bold">{linkData.title}</h1>
-                    <p className="text-muted-foreground">
+                    <h1 className="text-2xl md:text-3xl font-bold">{linkData.title}</h1>
+                    <p className="text-sm md:text-base text-muted-foreground">
                         {hasAccess ? "You have access to this content." : `Pay ${linkData.price} USDC to unlock.`}
                     </p>
 
                     {/* Creator Verification */}
-                    <div className="flex items-center justify-center gap-2 text-sm">
+                    <div className="flex items-center justify-center gap-2 text-xs md:text-sm">
                         <span className="text-muted-foreground">Created by:</span>
                         <a
                             href={`https://basescan.org/address/${linkData.receiver_address}`}
@@ -399,47 +399,47 @@ export default function UnlockPage() {
                         <ConnectButton />
                     </div>
                 ) : hasAccess ? (
-                    <div className="bg-green-900/20 border border-green-900 rounded-2xl p-6 text-center space-y-4">
-                        <p className="text-green-400 font-medium">Payment Verified!</p>
+                    <div className="bg-green-900/20 border border-green-900 rounded-2xl p-4 md:p-6 text-center space-y-4">
+                        <p className="text-green-400 font-medium text-sm md:text-base">Payment Verified!</p>
                         <a
                             href={linkData.target_url.startsWith('http') ? linkData.target_url : `https://${linkData.target_url}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
+                            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl font-semibold transition-colors text-sm md:text-base"
                         >
-                            <Download className="w-5 h-5" />
+                            <Download className="w-4 h-4 md:w-5 md:h-5" />
                             Access Content
                         </a>
                     </div>
                 ) : (
-                    <div className="bg-card border border-border rounded-2xl p-6 space-y-6 shadow-xl">
+                    <div className="bg-card border border-border rounded-2xl p-4 md:p-6 space-y-4 md:space-y-6 shadow-xl">
                         {/* Payment Method Toggle */}
                         <div className="grid grid-cols-2 gap-2 p-1 bg-muted rounded-lg">
                             <button
                                 onClick={() => setPaymentMethod('USDC')}
                                 className={cn(
-                                    "flex items-center justify-center gap-2 py-2 rounded-md text-sm font-medium transition-all",
+                                    "flex items-center justify-center gap-2 py-1.5 md:py-2 rounded-md text-xs md:text-sm font-medium transition-all",
                                     paymentMethod === 'USDC' ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
                                 )}
                             >
-                                <CreditCard className="w-4 h-4" />
+                                <CreditCard className="w-3 h-3 md:w-4 md:h-4" />
                                 USDC
                             </button>
                             <button
                                 onClick={() => setPaymentMethod('ETH')}
                                 className={cn(
-                                    "flex items-center justify-center gap-2 py-2 rounded-md text-sm font-medium transition-all",
+                                    "flex items-center justify-center gap-2 py-1.5 md:py-2 rounded-md text-xs md:text-sm font-medium transition-all",
                                     paymentMethod === 'ETH' ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
                                 )}
                             >
-                                <Coins className="w-4 h-4" />
+                                <Coins className="w-3 h-3 md:w-4 md:h-4" />
                                 ETH
                             </button>
                         </div>
 
-                        <div className="flex justify-between items-center text-sm text-muted-foreground bg-secondary/20 p-4 rounded-xl border border-border/50">
-                            <span>Price</span>
-                            <span className="text-foreground font-bold text-2xl text-primary">
+                        <div className="flex justify-between items-center text-sm text-muted-foreground bg-secondary/20 p-3 md:p-4 rounded-xl border border-border/50">
+                            <span className="text-xs md:text-sm">Price</span>
+                            <span className="text-foreground font-bold text-xl md:text-2xl text-primary">
                                 {paymentMethod === 'USDC'
                                     ? `${linkData.price} USDC`
                                     : ethPrice
@@ -449,7 +449,7 @@ export default function UnlockPage() {
                         </div>
 
                         {paymentMethod === 'USDC' && !hasBalance && (
-                            <div className="flex items-center gap-2 text-destructive text-sm bg-destructive/10 p-3 rounded-lg border border-destructive/20">
+                            <div className="flex items-center gap-2 text-destructive text-xs md:text-sm bg-destructive/10 p-3 rounded-lg border border-destructive/20">
                                 <AlertCircle className="w-4 h-4" />
                                 <span>Insufficient USDC balance</span>
                             </div>
@@ -460,6 +460,7 @@ export default function UnlockPage() {
                                 onClick={handleApprove}
                                 disabled={isPending || isConfirming || !hasBalance}
                                 isLoading={isPending || isConfirming}
+                                className="w-full"
                             >
                                 {isPending ? 'Confirm Approval...' :
                                     isConfirming ? 'Approving USDC...' :
@@ -470,6 +471,7 @@ export default function UnlockPage() {
                                 onClick={handlePay}
                                 disabled={isPending || isConfirming || checkingAccess}
                                 isLoading={isPending || isConfirming || checkingAccess}
+                                className="w-full"
                             >
                                 {isPending ? 'Confirm Payment...' :
                                     isConfirming ? 'Processing Transaction...' :
@@ -480,7 +482,7 @@ export default function UnlockPage() {
 
                         {isSuccess && !hasAccess && (hasAllowance || paymentMethod === 'ETH') && (
                             <div className="space-y-4">
-                                <div className="flex items-center gap-2 text-yellow-500 text-sm justify-center">
+                                <div className="flex items-center gap-2 text-yellow-500 text-xs md:text-sm justify-center">
                                     <Loader2 className="w-4 h-4 animate-spin" />
                                     <span>Transaction confirmed, verifying access...</span>
                                 </div>
@@ -489,6 +491,7 @@ export default function UnlockPage() {
                                     onClick={checkAccess}
                                     isLoading={checkingAccess}
                                     disabled={checkingAccess}
+                                    className="w-full"
                                 >
                                     Verify Access Manually
                                 </Button>
