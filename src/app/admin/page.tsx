@@ -10,7 +10,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { LinksTab } from './LinksTab';
 
 // Placeholder for V2 Contract Address - User needs to update this after deployment
-const CONTRACT_ADDRESS_V2 = '0x5CB532D8799b36a6E5dfa1663b6cFDDdDB431405';
+const CONTRACT_ADDRESS_V2 = '0xD2F2964Ac4665B539e7De9Dc3B14b1A8173c02E0';
 
 const BASELOCK_V2_ABI = [
     {
@@ -323,7 +323,31 @@ function SalesTab({ supabase }: { supabase: any }) {
 function FeesTab() {
     const { address } = useAccount();
     const [newFee, setNewFee] = useState('');
+    const [excludeAddress, setExcludeAddress] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
+    const [isExcluding, setIsExcluding] = useState(false);
+
+    // V3 ABI with setExcluded
+    const BASELOCK_V3_ABI = [
+        ...BASELOCK_V2_ABI,
+        {
+            "inputs": [
+                { "internalType": "address", "name": "_account", "type": "address" },
+                { "internalType": "bool", "name": "_excluded", "type": "bool" }
+            ],
+            "name": "setExcluded",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "name": "isExcludedFromFee",
+            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ] as const;
 
     const { data: currentFee, refetch: refetchFee } = useReadContract({
         address: CONTRACT_ADDRESS_V2,
@@ -337,17 +361,29 @@ function FeesTab() {
         functionName: 'owner',
     });
 
+    // Check if the input address is excluded
+    const { data: isAddressExcluded, refetch: refetchExclusion } = useReadContract({
+        address: CONTRACT_ADDRESS_V2,
+        abi: BASELOCK_V3_ABI,
+        functionName: 'isExcludedFromFee',
+        args: [excludeAddress as `0x${string}`],
+        query: {
+            enabled: !!excludeAddress && excludeAddress.startsWith('0x') && excludeAddress.length === 42
+        }
+    });
+
     const { writeContract, isPending, isSuccess } = useWriteContract();
 
     useEffect(() => {
         if (isSuccess) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
             setIsUpdating(false);
+            setIsExcluding(false);
             setNewFee('');
             refetchFee();
-            alert('Fee updated successfully!');
+            refetchExclusion();
+            alert('Transaction successful!');
         }
-    }, [isSuccess, refetchFee]);
+    }, [isSuccess, refetchFee, refetchExclusion]);
 
     const handleUpdateFee = () => {
         if (!newFee) return;
@@ -371,11 +407,33 @@ function FeesTab() {
         }
     };
 
+    const handleToggleExclusion = (shouldExclude: boolean) => {
+        if (!excludeAddress || !excludeAddress.startsWith('0x')) {
+            alert('Invalid address');
+            return;
+        }
+
+        setIsExcluding(true);
+        try {
+            writeContract({
+                address: CONTRACT_ADDRESS_V2,
+                abi: BASELOCK_V3_ABI,
+                functionName: 'setExcluded',
+                args: [excludeAddress as `0x${string}`, shouldExclude],
+            });
+        } catch (error) {
+            console.error('Error updating exclusion:', error);
+            setIsExcluding(false);
+        }
+    };
+
     const isOwner = address && ownerAddress && address.toLowerCase() === ownerAddress.toLowerCase();
 
     return (
         <div className="space-y-6">
             <h2 className="text-2xl font-bold">Fees & Contract Settings</h2>
+
+            {/* Current Stats */}
             <div className="bg-secondary/10 p-6 rounded-xl border border-border space-y-4">
                 <div className="flex justify-between items-center">
                     <div>
@@ -398,6 +456,7 @@ function FeesTab() {
                 </div>
             </div>
 
+            {/* Fee Management */}
             <div className="bg-card p-6 rounded-xl border border-border space-y-4">
                 <h3 className="font-semibold text-foreground flex items-center gap-2">
                     <Settings className="w-4 h-4" /> Update Fee
@@ -440,6 +499,59 @@ function FeesTab() {
                                 className="px-6 py-2 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isPending || isUpdating ? 'Updating Fee...' : 'Update Fee'}
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* Fee Exclusion Management */}
+            <div className="bg-card p-6 rounded-xl border border-border space-y-4">
+                <h3 className="font-semibold text-foreground flex items-center gap-2">
+                    <ShieldAlert className="w-4 h-4" /> Fee Exclusion (VIP)
+                </h3>
+                <p className="text-sm text-muted-foreground">Exclude specific addresses from paying platform fees.</p>
+
+                {!isOwner ? (
+                    <div className="bg-yellow-500/10 p-4 rounded-xl border border-yellow-500/20 text-yellow-500 text-sm">
+                        Only the contract owner can manage exclusions.
+                    </div>
+                ) : (
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-muted-foreground">Wallet Address</label>
+                            <div className="flex gap-2">
+                                <input
+                                    type="text"
+                                    placeholder="0x..."
+                                    value={excludeAddress}
+                                    onChange={(e) => setExcludeAddress(e.target.value)}
+                                    className="flex-1 bg-background border border-input rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                                />
+                            </div>
+                            {excludeAddress && excludeAddress.length === 42 && (
+                                <div className="text-sm">
+                                    Status: <span className={cn("font-bold", isAddressExcluded ? "text-green-500" : "text-muted-foreground")}>
+                                        {isAddressExcluded ? "Excluded (No Fee)" : "Standard (Pays Fee)"}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={() => handleToggleExclusion(false)}
+                                disabled={isPending || isExcluding || !excludeAddress}
+                                className="px-4 py-2 bg-secondary text-secondary-foreground rounded-xl font-medium hover:bg-secondary/80 transition-colors disabled:opacity-50"
+                            >
+                                Include (Charge Fee)
+                            </button>
+                            <button
+                                onClick={() => handleToggleExclusion(true)}
+                                disabled={isPending || isExcluding || !excludeAddress}
+                                className="px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
+                            >
+                                {isPending || isExcluding ? 'Updating...' : 'Exclude (No Fee)'}
                             </button>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ const publicClient = createPublicClient({
 });
 
 // TODO: Update this after deploying V2
-const CONTRACT_ADDRESS = '0x5CB532D8799b36a6E5dfa1663b6cFDDdDB431405';
+const CONTRACT_ADDRESS = '0xD2F2964Ac4665B539e7De9Dc3B14b1A8173c02E0';
 
 export async function POST(req: NextRequest) {
     try {
