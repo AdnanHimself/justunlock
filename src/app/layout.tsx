@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     default: "BaseLock | Monetize Any Link with Crypto",
     template: "%s | BaseLock"
   },
-  description: "Turn any URL, file, or text into a digital product. The fastest way to sell content for USDC or ETH on Base. No accounts needed, instant payouts.",
-  keywords: ["Base", "Crypto Payment Link", "Sell Files with Crypto", "USDC Paywall", "Token Gate", "Monetize Links", "Ethereum", "L2"],
+  description: "The easiest way to monetize access, collect deposits, and sell digital goods with crypto. Instant payouts in USDC/ETH on Base.",
+  keywords: ["Base", "Crypto Payment Link", "Telegram Paywall", "Consulting Deposit", "USDC Payment", "Monetize Links", "Ethereum", "L2"],
   authors: [{ name: "BaseLock Team" }],
   creator: "BaseLock",
   openGraph: {
