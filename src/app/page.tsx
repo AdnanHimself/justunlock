@@ -172,8 +172,8 @@ export default function Home() {
 
           {/* Hero Section */}
           <div className="space-y-4 max-w-4xl mx-auto text-center pt-4 md:pt-8">
-            <h1 className="text-3xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-primary to-blue-600 dark:from-primary dark:to-blue-400 bg-clip-text text-transparent pb-1">
-              Make Any Link Pay.
+            <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-foreground pb-1">
+              Make Any Link <span className="bg-gradient-to-r from-primary to-blue-600 dark:from-primary dark:to-blue-400 bg-clip-text text-transparent">Pay.</span>
             </h1>
             <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-2xl mx-auto">
               Turn any URL or file into a secure crypto paywall.
