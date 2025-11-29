@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "BaseLock | Monetize Any Link with Crypto",
     template: "%s | BaseLock"
   },
-  description: "The easiest way to monetize access, collect deposits, and sell digital goods with crypto. Instant payouts in USDC/ETH on Base.",
+  description: "Turn any URL, image, or text into a digital product. Instant payouts in USDC/ETH on Base.",
   keywords: ["Base", "Crypto Payment Link", "Telegram Paywall", "Consulting Deposit", "USDC Payment", "Monetize Links", "Ethereum", "L2"],
   authors: [{ name: "BaseLock Team" }],
   creator: "BaseLock",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://baselock.vercel.app",
     title: "BaseLock | Monetize Any Link with Crypto",
-    description: "The easiest way to monetize access, collect deposits, and sell digital goods with crypto. Instant payouts in USDC/ETH on Base.",
+    description: "Turn any URL, image, or text into a digital product. Instant payouts in USDC/ETH on Base.",
     siteName: "BaseLock",
     images: [
       {
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "BaseLock | Monetize Any Link with Crypto",
-    description: "The easiest way to monetize access, collect deposits, and sell digital goods with crypto. Instant payouts in USDC/ETH on Base.",
+    description: "Turn any URL, image, or text into a digital product. Instant payouts in USDC/ETH on Base.",
     creator: "@baselock", // Placeholder
     images: ["/og-image.png"],
   },
