@@ -7,7 +7,7 @@
   --card-foreground: #09090b;
   --popover: #ffffff;
   --popover-foreground: #09090b;
-  --primary: #0052FF;
+  --primary: #1652F0;
   --primary-foreground: #fafafa;
   --secondary: #f4f4f5;
   --secondary-foreground: #18181b;
@@ -19,7 +19,7 @@
   --destructive-foreground: #fafafa;
   --border: #e4e4e7;
   --input: #e4e4e7;
-  --ring: #0052FF;
+  --ring: #1652F0;
   --radius: 0.75rem;
 }
 
@@ -30,7 +30,7 @@
   --card-foreground: #fafafa;
   --popover: #09090b;
   --popover-foreground: #fafafa;
-  --primary: #0052FF;
+  --primary: #1652F0;
   --primary-foreground: #fafafa;
   --secondary: #27272a;
   --secondary-foreground: #fafafa;
@@ -42,7 +42,7 @@
   --destructive-foreground: #fafafa;
   --border: #27272a;
   --input: #27272a;
-  --ring: #0052FF;
+  --ring: #1652F0;
 }
 
 @theme inline {
@@ -86,12 +86,12 @@ body {
   }
 
   .hover-glow:hover {
-    box-shadow: 0 0 25px rgba(0, 82, 255, 0.6);
+    box-shadow: 0 0 25px rgba(22, 82, 240, 0.6);
     transform: translateY(-1px);
   }
 
   .glow {
-    box-shadow: 0 0 25px rgba(0, 82, 255, 0.5);
+    box-shadow: 0 0 25px rgba(22, 82, 240, 0.5);
   }
 
   .text-base-black {

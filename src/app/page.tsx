@@ -449,24 +449,24 @@ export default function Home() {
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 text-left">
               <UseCaseCard
-                icon="🚀"
+                icon="�"
+                title="Contract Addresses"
+                description="Launching a coin? Lock the CA to prevent sniper bots and ensure fair entry for real humans."
+              />
+              <UseCaseCard
+                icon="�🚀"
                 title="Exclusive &apos;Alpha&apos;"
                 description="Sell time-sensitive trading insights or market analysis. The value is in the speed."
               />
               <UseCaseCard
-                icon="🤝"
-                title="Consultation Deposits"
-                description="Stop no-shows. Send a locked Calendly link that requires a $50 deposit to book."
+                icon="🌹"
+                title="Date Deposit"
+                description="Stop getting ghosted. Send a locked invite that requires a $50 deposit to accept."
               />
               <UseCaseCard
                 icon="💬"
                 title="Community Access"
                 description="Gate your Telegram or Discord invite links. Filter out bots and verify supporters."
-              />
-              <UseCaseCard
-                icon="📂"
-                title="Digital Downloads"
-                description="Presets, templates, or checklists. Low-cost tools that users are happy to pay for."
               />
             </div>
           </div>
