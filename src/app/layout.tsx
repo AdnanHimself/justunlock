@@ -51,11 +51,6 @@ export const metadata: Metadata = {
     // creator: "@your_twitter_handle", // If you don't have one, delete this line
     images: ["/og-image.png"],
   },
-  icons: {
-    icon: '/og-logo.png',
-    shortcut: '/og-logo.png',
-    apple: '/og-logo.png',
-  },
   robots: {
     index: true,
     follow: true,
