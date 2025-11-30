@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     default: "JustUnlock | Monetize Any Link with Crypto",
     template: "%s | JustUnlock"
   },
-  // Das hier lesen Menschen bei Google & Twitter. Es muss zum Klicken anregen:
+  // This is read by humans on Google & Twitter. It must encourage clicking:
   description: "The simplest Gumroad alternative for crypto. Turn any URL, Telegram invite, or file into a digital product. Instant payouts in USDC/ETH on Base. No sign-ups.",
 
-  // Deine Keyword-Liste (Technisch sauber eingebunden):
+  // Your keyword list (Technically integrated):
   keywords: [
     "Base", "Crypto Payment Link", "Telegram Paywall", "Consulting Deposit",
     "USDC Payment", "Monetize Links", "Ethereum", "L2",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   authors: [{ name: "JustUnlock Team" }],
   creator: "JustUnlock",
 
-  // Social Media Vorschau (Facebook, Discord, LinkedIn, WhatsApp)
+  // Social Media Preview (Facebook, Discord, LinkedIn, WhatsApp)
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "JustUnlock",
     images: [
       {
-        url: "/og-image.png", // Das Bild muss im public Ordner liegen
+        url: "/og-image.png", // The image must be in the public folder
         width: 1200,
         height: 630,
         alt: "JustUnlock - Pay-to-Reveal Links",
@@ -43,12 +43,12 @@ export const metadata: Metadata = {
     ],
   },
 
-  // Twitter / X Vorschau
+  // Twitter / X Preview
   twitter: {
     card: "summary_large_image",
     title: "JustUnlock | Monetize Any Link with Crypto",
     description: "Turn any URL, image, or text into a digital product. Instant payouts in USDC/ETH on Base.",
-    // creator: "@dein_twitter_handle", // Falls du keinen hast, lösch diese Zeile
+    // creator: "@your_twitter_handle", // If you don't have one, delete this line
     images: ["/og-image.png"],
   },
 
