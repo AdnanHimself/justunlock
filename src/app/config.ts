@@ -20,7 +20,7 @@ const baseWithFallbacks: Chain = {
 };
 
 export const config = getDefaultConfig({
-    appName: 'BaseLock',
+    appName: 'JustUnlock',
     projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || 'YOUR_PROJECT_ID',
     chains: [baseWithFallbacks],
     ssr: true,

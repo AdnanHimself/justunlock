@@ -56,7 +56,7 @@ export function Navbar() {
                         <div className="p-1.5 bg-primary/10 rounded-lg">
                             <Lock className="w-5 h-5 text-primary" />
                         </div>
-                        BaseLock
+                        JustUnlock
                     </Link>
 
                     {/* Desktop Links (Hidden on Mobile) */}

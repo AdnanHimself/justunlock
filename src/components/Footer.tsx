@@ -6,7 +6,7 @@ export function Footer() {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <div className="space-y-4">
-                        <h3 className="font-bold text-lg">BaseLock</h3>
+                        <h3 className="font-bold text-lg">JustUnlock</h3>
                         <p className="text-sm text-muted-foreground">
                             The fastest way to monetize any link on Base.
                         </p>
@@ -41,7 +41,7 @@ export function Footer() {
 
                 <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="text-sm text-muted-foreground">
-                        &copy; {new Date().getFullYear()} BaseLock. All rights reserved.
+                        &copy; {new Date().getFullYear()} JustUnlock. All rights reserved.
                     </div>
                     <div className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
                         <a href="https://base.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">

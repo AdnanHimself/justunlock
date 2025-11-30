@@ -27,7 +27,7 @@ export default function HowItWorksPage() {
                         <div className="space-y-2 md:space-y-3">
                             <h3 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">Share It</h3>
                             <p className="text-foreground/80 text-sm md:text-base">
-                                We generate a unique baselock.xyz link. Post it on Farcaster, Twitter, or send it via DM.
+                                We generate a unique justunlock.link link. Post it on Farcaster, Twitter, or send it via DM.
                             </p>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ export default function HowItWorksPage() {
                     <div className="grid gap-6 md:grid-cols-3">
                         <div className="space-y-2">
                             <h3 className="font-semibold">Keep it accessible</h3>
-                            <p className="text-sm text-foreground/80">BaseLock works best for impulse buys ($1 - $20).</p>
+                            <p className="text-sm text-foreground/80">JustUnlock works best for impulse buys ($1 - $20).</p>
                         </div>
                         <div className="space-y-2">
                             <h3 className="font-semibold">Describe the value</h3>
@@ -68,8 +68,8 @@ export default function HowItWorksPage() {
                 {/* Is BaseLock Right For Me? */}
                 <div className="py-8 md:py-10 border-t border-border space-y-6">
                     <div className="text-center space-y-2">
-                        <h2 className="text-2xl md:text-3xl font-bold">Is BaseLock right for me?</h2>
-                        <p className="text-foreground/80">BaseLock is built for speed and friction-free commerce.</p>
+                        <h2 className="text-2xl md:text-3xl font-bold">Is JustUnlock right for me?</h2>
+                        <p className="text-foreground/80">JustUnlock is built for speed and friction-free commerce.</p>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
@@ -100,7 +100,7 @@ export default function HowItWorksPage() {
 
                     <div className="text-center bg-secondary/30 p-4 rounded-xl">
                         <p className="font-medium text-foreground">
-                            &quot;Think of BaseLock as a digital vending machine. Quick, easy, and direct.&quot;
+                            &quot;Think of JustUnlock as a digital vending machine. Quick, easy, and direct.&quot;
                         </p>
                     </div>
                 </div>
@@ -117,12 +117,12 @@ export default function HowItWorksPage() {
                     <h2 className="text-2xl font-bold text-center pt-4">Frequently Asked Questions</h2>
                     <div className="grid gap-3 md:gap-4 md:grid-cols-2">
                         <div className="p-4 md:p-6 bg-secondary/20 rounded-xl">
-                            <h4 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Does BaseLock take a fee?</h4>
+                            <h4 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Does JustUnlock take a fee?</h4>
                             <p className="text-foreground/80 text-xs md:text-sm">We take a flat 1% protocol fee on successful transactions to maintain the platform. There are no monthly costs.</p>
                         </div>
                         <div className="p-4 md:p-6 bg-secondary/20 rounded-xl">
                             <h4 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Can buyers share the link after buying?</h4>
-                            <p className="text-foreground/80 text-xs md:text-sm">Yes. Once revealed, the link is theirs. BaseLock is designed for convenience and speed, not enterprise-grade DRM. It is perfect for communities, deposits, and supporters.</p>
+                            <p className="text-foreground/80 text-xs md:text-sm">Yes. Once revealed, the link is theirs. JustUnlock is designed for convenience and speed, not enterprise-grade DRM. It is perfect for communities, deposits, and supporters.</p>
                         </div>
                         <div className="p-4 md:p-6 bg-secondary/20 rounded-xl">
                             <h4 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Do buyers need a wallet?</h4>

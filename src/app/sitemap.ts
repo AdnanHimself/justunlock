@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { useCases } from '@/lib/use-cases'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://baselock.vercel.app'
+    const baseUrl = 'https://justunlock.link'
 
     const useCaseUrls = useCases.map((useCase) => ({
         url: `${baseUrl}/use-cases/${useCase.slug}`,

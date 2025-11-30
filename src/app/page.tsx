@@ -22,6 +22,8 @@ const FEE_ABI = [{
   type: "function"
 }] as const;
 
+
+
 export default function Home() {
   const { address, isConnected } = useAccount();
   const { signMessageAsync } = useSignMessage();
@@ -145,7 +147,7 @@ export default function Home() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'BaseLock',
+    name: 'JustUnlock',
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Web',
     offers: {
@@ -413,7 +415,7 @@ export default function Home() {
           {/* Use Cases Section */}
           <div className="space-y-10">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold">What can you sell with BaseLock?</h2>
+              <h2 className="text-3xl font-bold">What can you sell with JustUnlock?</h2>
               <p className="text-muted-foreground text-lg">Perfect for micro-transactions and time-sensitive value.</p>
             </div>
 
@@ -446,7 +448,7 @@ export default function Home() {
             <div className="max-w-3xl mx-auto space-y-6">
               <h2 className="text-3xl font-bold">Built for Speed, Not Bureaucracy.</h2>
               <p className="text-lg text-foreground/80 leading-relaxed">
-                BaseLock is designed as a digital cash register, not a bank vault. It is the fastest way to facilitate honest exchanges between you and your audience.
+                JustUnlock is designed as a digital cash register, not a bank vault. It is the fastest way to facilitate honest exchanges between you and your audience.
               </p>
               <ul className="space-y-3">
                 <li className="flex items-center gap-3">

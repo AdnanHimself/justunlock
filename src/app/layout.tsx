@@ -8,36 +8,36 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://baselock.vercel.app'),
+  metadataBase: new URL('https://justunlock.link'),
   title: {
-    default: "BaseLock | Monetize Any Link with Crypto",
-    template: "%s | BaseLock"
+    default: "JustUnlock | Monetize Any Link with Crypto",
+    template: "%s | JustUnlock"
   },
   description: "Turn any URL, image, or text into a digital product. Instant payouts in USDC/ETH on Base.",
   keywords: ["Base", "Crypto Payment Link", "Telegram Paywall", "Consulting Deposit", "USDC Payment", "Monetize Links", "Ethereum", "L2"],
-  authors: [{ name: "BaseLock Team" }],
-  creator: "BaseLock",
+  authors: [{ name: "JustUnlock Team" }],
+  creator: "JustUnlock",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://baselock.vercel.app",
-    title: "BaseLock | Monetize Any Link with Crypto",
+    url: "https://justunlock.link",
+    title: "JustUnlock | Monetize Any Link with Crypto",
     description: "Turn any URL, image, or text into a digital product. Instant payouts in USDC/ETH on Base.",
-    siteName: "BaseLock",
+    siteName: "JustUnlock",
     images: [
       {
         url: "/og-image.png", // We should ensure this exists or use a placeholder
         width: 1200,
         height: 630,
-        alt: "BaseLock - Pay-to-Reveal Links",
+        alt: "JustUnlock - Pay-to-Reveal Links",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaseLock | Monetize Any Link with Crypto",
+    title: "JustUnlock | Monetize Any Link with Crypto",
     description: "Turn any URL, image, or text into a digital product. Instant payouts in USDC/ETH on Base.",
-    creator: "@baselock", // Placeholder
+    creator: "@justunlock", // Placeholder
     images: ["/og-image.png"],
   },
   robots: {
