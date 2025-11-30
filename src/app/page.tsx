@@ -212,7 +212,7 @@ export default function Home() {
 
           {/* Creation Form (Always Visible) */}
           {createdLink ? (
-            <div className="max-w-md mx-auto bg-card border border-border rounded-3xl p-8 shadow-2xl space-y-6 animate-in fade-in zoom-in duration-300">
+            <div className="max-w-md mx-auto bg-card border border-border rounded-3xl p-8 shadow-[0_0_40px_rgba(22,82,240,0.2)] space-y-6 animate-in fade-in zoom-in duration-300">
               <div className="text-center space-y-2">
                 <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Check className="w-8 h-8 text-green-500" />
@@ -252,7 +252,7 @@ export default function Home() {
           ) : (
             <div className="max-w-lg mx-auto space-y-6">
 
-              <form id="create-link-form" onSubmit={handleCreate} className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-5 md:p-6 space-y-6 shadow-xl">
+              <form id="create-link-form" onSubmit={handleCreate} className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-5 md:p-6 space-y-6 shadow-[0_0_40px_rgba(22,82,240,0.1)]">
 
                 {/* Content Type Tabs */}
                 <div className="flex p-1.5 bg-secondary/50 rounded-2xl">
@@ -387,7 +387,7 @@ export default function Home() {
                   type="submit"
                   isLoading={loading}
                   disabled={loading}
-                  className="w-full h-12 text-base font-bold rounded-2xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
+                  className="w-full h-12 text-base font-bold rounded-2xl shadow-[0_0_20px_rgba(22,82,240,0.3)] hover:shadow-[0_0_30px_rgba(22,82,240,0.5)] transition-all"
                 >
                   {isConnected ? 'Create Paywall' : 'Create Paywall'}
                 </Button>

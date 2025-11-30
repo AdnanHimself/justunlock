@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { twMerge } from 'tailwind-merge';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Lock } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 
@@ -55,8 +56,13 @@ export function Navbar() {
                 <div className="flex items-center w-full h-14 md:h-auto">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors shrink-0 mr-8">
-                        <div className="p-1.5 bg-primary/10 rounded-lg">
-                            <Lock className="w-5 h-5 text-primary" />
+                        <div className="relative w-8 h-8 rounded-lg overflow-hidden">
+                            <Image
+                                src="/icon.png"
+                                alt="JustUnlock Logo"
+                                fill
+                                className="object-cover"
+                            />
                         </div>
                         JustUnlock
                     </Link>

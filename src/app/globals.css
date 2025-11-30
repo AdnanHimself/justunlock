@@ -87,7 +87,6 @@ body {
 
   .hover-glow:hover {
     box-shadow: 0 0 25px rgba(22, 82, 240, 0.6);
-    transform: translateY(-1px);
   }
 
   .glow {
