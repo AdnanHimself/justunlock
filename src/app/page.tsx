@@ -222,9 +222,9 @@ export default function Home() {
               </Button>
             </div>
           ) : (
-            <div className="max-w-xl mx-auto space-y-8">
+            <div className="max-w-lg mx-auto space-y-6">
 
-              <form id="create-link-form" onSubmit={handleCreate} className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-6 md:p-8 space-y-8 shadow-xl">
+              <form id="create-link-form" onSubmit={handleCreate} className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-5 md:p-6 space-y-6 shadow-xl">
 
                 {/* Content Type Tabs */}
                 <div className="flex p-1.5 bg-secondary/50 rounded-2xl">
@@ -272,7 +272,7 @@ export default function Home() {
                         placeholder="https://..."
                         value={targetUrl}
                         onChange={(e) => setTargetUrl(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-background border-2 border-border/50 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-lg"
+                        className="w-full pl-12 pr-4 py-3 bg-background border-2 border-border/50 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-base"
                         required
                       />
                     </div>
@@ -348,7 +348,7 @@ export default function Home() {
                       placeholder="0.00"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
-                      className="w-full bg-background border-2 border-border/50 rounded-2xl px-4 py-4 pl-12 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-xl font-semibold"
+                      className="w-full bg-background border-2 border-border/50 rounded-2xl px-4 py-3 pl-12 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-lg font-semibold"
                       required
                     />
                     <span className="absolute left-5 top-1/2 -translate-y-1/2 text-muted-foreground font-semibold">$</span>
@@ -359,7 +359,7 @@ export default function Home() {
                   type="submit"
                   isLoading={loading}
                   disabled={loading}
-                  className="w-full h-14 text-lg font-bold rounded-2xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
+                  className="w-full h-12 text-base font-bold rounded-2xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
                 >
                   {isConnected ? 'Create Paywall' : 'Create Paywall'}
                 </Button>

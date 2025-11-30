@@ -36,6 +36,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                         borderRadius: 'medium',
                         overlayBlur: 'small',
                     })}
+                    locale="en-US"
                 >
                     <ToastProvider>
                         {children}
