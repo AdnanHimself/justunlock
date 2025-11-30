@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       'fastbench': false,
       'sonic-boom': false,
       'desm': false,
+      'pino-pretty': false,
     };
     return config;
   },
