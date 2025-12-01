@@ -109,7 +109,7 @@ export default function HowItWorksPage() {
                         </p>
                         <div className="pt-2">
                             <Link href="/use-cases">
-                                <Button variant="outline" className="rounded-full px-6 gap-2">
+                                <Button variant="secondary" className="rounded-full px-6 gap-2">
                                     Explore Use Cases <ArrowRight className="w-4 h-4" />
                                 </Button>
                             </Link>

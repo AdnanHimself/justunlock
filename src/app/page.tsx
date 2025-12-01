@@ -522,7 +522,7 @@ export default function Home() {
 
             <div className="flex justify-center pt-4">
               <Link href="/use-cases">
-                <Button variant="outline" className="rounded-full px-8 h-12 text-base gap-2 group">
+                <Button variant="secondary" className="rounded-full px-8 h-12 text-base gap-2 group">
                   View All Use Cases
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
