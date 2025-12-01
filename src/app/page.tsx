@@ -67,6 +67,7 @@ export default function Home() {
     if (type === 'file') {
       if (file?.type.startsWith('image/')) prefix = 'img';
       else if (file?.type === 'application/pdf') prefix = 'pdf';
+      else if (file?.type === 'text/plain') prefix = 'txt';
       else prefix = 'file';
     }
     return `${prefix}-${Math.random().toString(36).substring(2, 8)}`;
@@ -328,7 +329,7 @@ export default function Home() {
                       <div className={`border-2 border-dashed ${file ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'} rounded-2xl p-8 text-center hover:bg-secondary/30 transition-all cursor-pointer relative group-hover:scale-[1.01] duration-200`}>
                         <input
                           type="file"
-                          accept="image/*,application/pdf"
+                          accept="image/*,application/pdf,text/plain"
                           onChange={(e) => {
                             const selectedFile = e.target.files?.[0];
                             if (selectedFile) {
@@ -353,9 +354,13 @@ export default function Home() {
                                 <div className="w-24 h-24 mx-auto rounded-xl overflow-hidden border border-border shadow-sm">
                                   <img src={URL.createObjectURL(file)} alt="Preview" className="w-full h-full object-cover" />
                                 </div>
-                              ) : (
+                              ) : file.type === 'application/pdf' ? (
                                 <div className="w-16 h-16 mx-auto bg-red-500/10 text-red-500 rounded-xl flex items-center justify-center">
                                   <span className="text-xs font-bold">PDF</span>
+                                </div>
+                              ) : (
+                                <div className="w-16 h-16 mx-auto bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center">
+                                  <span className="text-xs font-bold">TXT</span>
                                 </div>
                               )}
                               <div className="space-y-1">
@@ -375,7 +380,7 @@ export default function Home() {
                                 <span className="text-base font-medium text-foreground block">
                                   Click to upload file
                                 </span>
-                                <span className="text-xs text-muted-foreground">Max 25MB (Images, PDF)</span>
+                                <span className="text-xs text-muted-foreground">Max 25MB (Images, PDF, TXT)</span>
                               </div>
                             </>
                           )}

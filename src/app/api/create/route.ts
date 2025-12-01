@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
 
             const ALLOWED_MIMES = [
                 'image/jpeg', 'image/png', 'image/gif', 'image/webp',
-                'application/pdf'
+                'application/pdf', 'text/plain'
             ];
 
             if (!type || !ALLOWED_MIMES.includes(type.mime)) {
