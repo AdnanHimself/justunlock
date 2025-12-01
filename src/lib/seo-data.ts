@@ -46,7 +46,7 @@ export const platforms: Platform[] = [
     // Video
     { id: 'youtube', name: 'YouTube', categories: ['video', 'education'] },
     { id: 'vimeo', name: 'Vimeo', categories: ['video'] },
-    { id: 'loom', name: 'Loom', categories: ['video', 'productivity'] },
+    { id: 'loom', name: 'Loom', categories: ['video'] },
     { id: 'wistia', name: 'Wistia', categories: ['video'] },
     { id: 'tiktok', name: 'TikTok', categories: ['video', 'social'] },
     { id: 'twitch', name: 'Twitch', categories: ['video', 'gaming'] },

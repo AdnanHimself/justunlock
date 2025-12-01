@@ -80,7 +80,7 @@ export default function UseCasesList() {
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-xl mx-auto relative mt-10 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200 group">
+                        <div className="max-w-lg mx-auto relative mt-8 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200 group">
                             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none z-30">
                                 <Search className="h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                             </div>
@@ -89,14 +89,14 @@ export default function UseCasesList() {
                                 placeholder="Search platforms (e.g. Notion, Telegram)..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-12 pr-12 py-5 text-lg rounded-2xl border-2 border-border bg-background hover:border-primary/30 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all shadow-sm relative z-20"
+                                className="w-full pl-12 pr-12 py-3 text-base rounded-full border-2 border-border bg-background hover:border-primary/30 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all shadow-sm relative z-20"
                             />
                             {searchTerm && (
                                 <button
                                     onClick={() => setSearchTerm('')}
                                     className="absolute inset-y-0 right-4 flex items-center text-muted-foreground hover:text-foreground z-30 cursor-pointer"
                                 >
-                                    <X className="h-5 w-5" />
+                                    <X className="h-4 w-4" />
                                 </button>
                             )}
                         </div>
