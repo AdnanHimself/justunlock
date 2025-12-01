@@ -123,7 +123,7 @@ export const useCases: UseCase[] = [
         heroTitle: 'Sell PDFs for USDC & ETH.',
         heroDescription: 'Upload your PDF, set a price, and share the link. The easiest way to sell ebooks and guides on Base.',
         benefits: ['Direct file upload', 'No hosting needed', 'Instant download', 'Global sales'],
-        faq: [{ question: 'Max file size?', answer: '50MB.' }, { question: 'Fees?', answer: 'Only 1%.' }]
+        faq: [{ question: 'Max file size?', answer: '4MB.' }, { question: 'Fees?', answer: 'Only 1%.' }]
     },
     {
         slug: 'sell-ebook-crypto',
@@ -257,7 +257,7 @@ export const useCases: UseCase[] = [
         heroTitle: 'Sell Data.',
         heroDescription: 'Collected a valuable list or dataset? Sell the CSV or JSON file directly.',
         benefits: ['High value', 'B2B sales', 'Instant download', 'Secure'],
-        faq: [{ question: 'File size?', answer: 'Up to 50MB.' }, { question: 'Format?', answer: 'CSV, JSON, Zip.' }]
+        faq: [{ question: 'File size?', answer: 'Up to 4MB.' }, { question: 'Format?', answer: 'CSV, JSON, Zip.' }]
     },
     {
         slug: 'sell-config-files',
@@ -289,7 +289,7 @@ export const useCases: UseCase[] = [
         heroTitle: 'Sell Sample Packs.',
         heroDescription: 'Sound designers: Sell your drum kits and loop packs. Upload the Zip file.',
         benefits: ['Passive income', 'Music community', 'Simple delivery', 'Crypto payments'],
-        faq: [{ question: 'Size limit?', answer: '50MB (split if larger).' }, { question: 'Format?', answer: 'Zip recommended.' }]
+        faq: [{ question: 'Size limit?', answer: '4MB (split if larger).' }, { question: 'Format?', answer: 'Zip recommended.' }]
     },
     {
         slug: 'sell-stock-photos',
@@ -309,7 +309,7 @@ export const useCases: UseCase[] = [
         heroTitle: 'Sell Stock Footage.',
         heroDescription: 'Sell your B-roll, drone shots, or exclusive clips. Upload the video file.',
         benefits: ['Filmmaker economy', 'Direct sales', 'High value', 'Instant transfer'],
-        faq: [{ question: 'Size?', answer: 'Max 50MB.' }, { question: 'Format?', answer: 'MP4, MOV.' }]
+        faq: [{ question: 'Size?', answer: 'Max 4MB.' }, { question: 'Format?', answer: 'MP4, MOV.' }]
     },
     {
         slug: 'sell-podcasts',
@@ -517,7 +517,7 @@ export const useCases: UseCase[] = [
         heroTitle: 'Sell 3D Assets.',
         heroDescription: 'Sell your OBJ, FBX, or Blender files. Upload the zip.',
         benefits: ['Design market', 'B2B', 'Instant download', 'Crypto'],
-        faq: [{ question: 'Size?', answer: 'Max 50MB.' }, { question: 'License?', answer: 'Include in zip.' }]
+        faq: [{ question: 'Size?', answer: 'Max 4MB.' }, { question: 'License?', answer: 'Include in zip.' }]
     },
     {
         slug: 'sell-promotional-slot',
