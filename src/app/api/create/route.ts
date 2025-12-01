@@ -88,11 +88,11 @@ export async function POST(req: NextRequest) {
         // Handle File Upload
         if ((content_type === 'file' || content_type === 'image') && file) {
             console.log('[API] Processing file upload');
-            // 1. Validate File Size (Max 25MB)
-            const MAX_SIZE = 25 * 1024 * 1024; // 25MB
+            // 1. Validate File Size (Max 4MB)
+            const MAX_SIZE = 4 * 1024 * 1024; // 4MB
             if (file.size > MAX_SIZE) {
                 console.error('[API] File size exceeds limit:', file.size);
-                return NextResponse.json({ error: 'File size exceeds 25MB limit' }, { status: 400 });
+                return NextResponse.json({ error: 'File size exceeds 4MB limit (Vercel Constraint)' }, { status: 400 });
             }
 
             // Convert File to ArrayBuffer for inspection and upload

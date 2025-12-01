@@ -333,8 +333,8 @@ export default function Home() {
                           onChange={(e) => {
                             const selectedFile = e.target.files?.[0];
                             if (selectedFile) {
-                              if (selectedFile.size > 25 * 1024 * 1024) {
-                                showToast('File size exceeds 25MB limit', 'error');
+                              if (selectedFile.size > 4 * 1024 * 1024) {
+                                showToast('File size exceeds 4MB limit', 'error');
                                 e.target.value = ''; // Clear input
                                 setFile(null);
                               } else {
@@ -380,7 +380,7 @@ export default function Home() {
                                 <span className="text-base font-medium text-foreground block">
                                   Click to upload file
                                 </span>
-                                <span className="text-xs text-muted-foreground">Max 25MB (Images, PDF, TXT)</span>
+                                <span className="text-xs text-muted-foreground">Max 4MB (Images, PDF, TXT)</span>
                               </div>
                             </>
                           )}
