@@ -63,7 +63,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200">
                             <Link href="/">
-                                <Button size="lg" className="h-14 px-8 text-lg rounded-full gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                                <Button className="h-14 px-8 text-lg rounded-full gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                                     Start Selling Now <ArrowRight className="w-5 h-5" />
                                 </Button>
                             </Link>
@@ -183,7 +183,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
                 <div className="container mx-auto px-4 text-center space-y-8">
                     <h2 className="text-3xl md:text-5xl font-bold">Ready to monetize your {platform.name} audience?</h2>
                     <Link href="/">
-                        <Button size="lg" className="h-16 px-10 text-xl rounded-full gap-2 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                        <Button className="h-16 px-10 text-xl rounded-full gap-2 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
                             Create {platform.name} Paywall <ArrowRight className="w-6 h-6" />
                         </Button>
                     </Link>
