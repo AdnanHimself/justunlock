@@ -14,9 +14,10 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each page
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
     const combinations = generateSeoCombinations();
-    const combo = combinations.find((c) => c.slug === params.slug);
+    const combo = combinations.find((c) => c.slug === slug);
 
     if (!combo) return {};
 
@@ -30,9 +31,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
 }
 
-export default function UseCasePage({ params }: { params: { slug: string } }) {
+export default async function UseCasePage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
     const combinations = generateSeoCombinations();
-    const combo = combinations.find((c) => c.slug === params.slug);
+    const combo = combinations.find((c) => c.slug === slug);
 
     if (!combo) {
         notFound();
