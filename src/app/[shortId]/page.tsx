@@ -454,7 +454,7 @@ export default function UnlockPage() {
                             </div>
                         ) : linkData.content_type === 'file' ? (
                             <Button
-                                className="w-full gap-2 text-lg h-12 md:h-14 shadow-[0_0_20px_rgba(22,82,240,0.3)] hover:shadow-[0_0_30px_rgba(22,82,240,0.5)] transition-all"
+                                className="w-full gap-2 text-lg h-12 md:h-14 transition-all"
                                 onClick={() => window.open(linkData.target_url, '_blank')}
                             >
                                 <Download className="w-5 h-5" />
@@ -462,7 +462,7 @@ export default function UnlockPage() {
                             </Button>
                         ) : (
                             <Button
-                                className="w-full gap-2 text-lg h-12 md:h-14 shadow-[0_0_20px_rgba(22,82,240,0.3)] hover:shadow-[0_0_30px_rgba(22,82,240,0.5)] transition-all"
+                                className="w-full gap-2 text-lg h-12 md:h-14 transition-all"
                                 onClick={() => window.open(linkData.target_url, '_blank')}
                             >
                                 <ExternalLink className="w-5 h-5" />

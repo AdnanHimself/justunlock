@@ -77,8 +77,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <Providers>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers>
             <div className="flex flex-col min-h-screen">
               <Navbar />
               <div className="flex-1">
@@ -86,8 +86,8 @@ export default function RootLayout({
               </div>
               <Footer />
             </div>
-          </ThemeProvider>
-        </Providers>
+          </Providers>
+        </ThemeProvider>
         <SpeedInsights />
         <Analytics />
       </body>

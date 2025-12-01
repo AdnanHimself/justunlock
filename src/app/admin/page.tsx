@@ -156,7 +156,7 @@ function TabButton({ active, onClick, icon, label }: any) {
             className={cn(
                 "flex-shrink-0 md:w-full flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all text-left text-sm md:text-base cursor-pointer",
                 active
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                    ? "bg-primary text-primary-foreground"
                     : "hover:bg-secondary text-muted-foreground hover:text-foreground bg-secondary/10 md:bg-transparent"
             )}
         >
@@ -483,7 +483,7 @@ function FeesTab() {
                                             className={cn(
                                                 "flex-1 min-w-[80px] py-3 rounded-xl border transition-all font-medium text-sm",
                                                 isSelected
-                                                    ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                                                    ? "bg-primary text-primary-foreground border-primary"
                                                     : "bg-background hover:bg-secondary border-border text-muted-foreground hover:text-foreground"
                                             )}
                                         >
