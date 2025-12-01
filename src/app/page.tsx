@@ -198,7 +198,7 @@ export default function Home() {
 
           {/* Hero Section */}
           <div className="space-y-4 max-w-4xl mx-auto text-center pt-4 md:pt-8">
-            <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-foreground pb-1">
+            <h1 className="text-3xl md:text-[3.5rem] font-bold tracking-tight text-foreground pb-1 leading-tight">
               Make Any Link <span className="bg-gradient-to-r from-primary to-blue-600 dark:from-primary dark:to-blue-400 bg-clip-text text-transparent">Pay.</span>
             </h1>
             <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-2xl mx-auto">
@@ -248,7 +248,7 @@ export default function Home() {
           ) : (
             <div className="max-w-lg mx-auto space-y-6">
 
-              <form id="create-link-form" onSubmit={handleCreate} className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-5 md:p-6 space-y-6">
+              <form id="create-link-form" onSubmit={handleCreate} className="bg-card/50 backdrop-blur-sm border border-border/80 rounded-3xl p-5 md:p-6 space-y-6">
 
                 {/* Content Type Tabs */}
                 <div className="flex p-1.5 bg-secondary/50 rounded-2xl">
@@ -296,7 +296,7 @@ export default function Home() {
                         placeholder="https://..."
                         value={targetUrl}
                         onChange={(e) => setTargetUrl(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-background border-2 border-border/50 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-base"
+                        className="w-full pl-12 pr-4 py-3 bg-background border-2 border-border/80 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-base"
                         required
                       />
                     </div>
@@ -306,7 +306,7 @@ export default function Home() {
                         placeholder="Enter secret text, passwords, or exclusive content..."
                         value={targetUrl}
                         onChange={(e) => setTargetUrl(e.target.value)}
-                        className="w-full p-4 bg-background border-2 border-border/50 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all min-h-[140px] font-mono text-base resize-none"
+                        className="w-full p-4 bg-background border-2 border-border/80 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all min-h-[140px] font-mono text-base resize-none"
                         required
                       />
                     </div>
@@ -356,7 +356,7 @@ export default function Home() {
                     placeholder="e.g. My Exclusive Guide"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full bg-background border-2 border-border/50 rounded-2xl px-4 py-3.5 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-base"
+                    className="w-full bg-background border-2 border-border/80 rounded-2xl px-4 py-3.5 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-base"
                   />
                 </div>
 
@@ -372,7 +372,7 @@ export default function Home() {
                       placeholder="0.00"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
-                      className="w-full bg-background border-2 border-border/50 rounded-2xl px-4 py-3 pl-12 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-lg font-semibold"
+                      className="w-full bg-background border-2 border-border/80 rounded-2xl px-4 py-3 pl-12 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-lg font-semibold"
                       required
                     />
                     <span className="absolute left-5 top-1/2 -translate-y-1/2 text-muted-foreground font-semibold">$</span>
@@ -445,26 +445,36 @@ export default function Home() {
               <p className="text-muted-foreground text-lg">Perfect for micro-transactions and time-sensitive value.</p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 text-left">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 text-left">
               <UseCaseCard
-                icon="�"
-                title="Contract Addresses"
-                description="Launching a coin? Lock the CA to prevent sniper bots and ensure fair entry for real humans."
+                icon="💬"
+                title="Telegram & Discord"
+                description="Gate your community invite links. Filter out bots and verify supporters with a small fee."
               />
               <UseCaseCard
-                icon="�🚀"
-                title="Exclusive &apos;Alpha&apos;"
+                icon="📅"
+                title="Calendly Links"
+                description="Charge for your time. Lock your booking link so only serious clients can schedule a call."
+              />
+              <UseCaseCard
+                icon="💎"
+                title="Token CAs"
+                description="Launching a coin? Lock the Contract Address to prevent sniper bots and ensure fair entry."
+              />
+              <UseCaseCard
+                icon="📝"
+                title="Notion Templates"
+                description="Sell your productivity systems. Lock the template link and get paid instantly in crypto."
+              />
+              <UseCaseCard
+                icon="🚀"
+                title="Exclusive Alpha"
                 description="Sell time-sensitive trading insights or market analysis. The value is in the speed."
               />
               <UseCaseCard
-                icon="🌹"
-                title="Date Deposit"
-                description="Stop getting ghosted. Send a locked invite that requires a $50 deposit to accept."
-              />
-              <UseCaseCard
-                icon="💬"
-                title="Community Access"
-                description="Gate your Telegram or Discord invite links. Filter out bots and verify supporters."
+                icon="🎨"
+                title="Digital Assets"
+                description="Sell presets, ebooks, or design files. Upload directly or link to your cloud storage."
               />
             </div>
           </div>
