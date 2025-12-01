@@ -61,8 +61,15 @@ export default function Home() {
 
 
   // Helper to generate a random 6-character slug for the link
-  const generateSlug = () => {
-    return Math.random().toString(36).substring(2, 8);
+  const generateSlug = (type: 'url' | 'text' | 'file') => {
+    let prefix = 'link';
+    if (type === 'text') prefix = 'txt';
+    if (type === 'file') {
+      if (file?.type.startsWith('image/')) prefix = 'img';
+      else if (file?.type === 'application/pdf') prefix = 'pdf';
+      else prefix = 'file';
+    }
+    return `${prefix}-${Math.random().toString(36).substring(2, 8)}`;
   };
 
   // Effect to auto-submit the form after the user connects their wallet
@@ -95,7 +102,8 @@ export default function Home() {
     if (!address) return;
 
     setLoading(true);
-    const slug = generateSlug();
+    setLoading(true);
+    const slug = generateSlug(contentType);
 
     try {
       // 1. Sign Message for Security (DoS Protection)
@@ -301,7 +309,7 @@ export default function Home() {
                       />
                     </div>
                   ) : contentType === 'text' ? (
-                    <div className="relative group">
+                    <div className="relative group space-y-2">
                       <textarea
                         placeholder="Enter secret text, passwords, or exclusive content..."
                         value={targetUrl}
@@ -309,18 +317,23 @@ export default function Home() {
                         className="w-full p-4 bg-background border-2 border-border/80 rounded-2xl focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all min-h-[140px] font-mono text-base resize-none"
                         required
                       />
+                      {targetUrl.match(/^https?:\/\//) && (
+                        <p className="text-xs text-yellow-500 font-medium flex items-center gap-1">
+                          ⚠️ Looks like a URL. Use the &quot;Link&quot; tab instead if you want to redirect users.
+                        </p>
+                      )}
                     </div>
                   ) : (
                     <div className="relative group">
-                      <div className="border-2 border-dashed border-border hover:border-primary/50 rounded-2xl p-10 text-center hover:bg-secondary/30 transition-all cursor-pointer relative group-hover:scale-[1.01] duration-200">
+                      <div className={`border-2 border-dashed ${file ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'} rounded-2xl p-8 text-center hover:bg-secondary/30 transition-all cursor-pointer relative group-hover:scale-[1.01] duration-200`}>
                         <input
                           type="file"
                           accept="image/*,application/pdf"
                           onChange={(e) => {
                             const selectedFile = e.target.files?.[0];
                             if (selectedFile) {
-                              if (selectedFile.size > 50 * 1024 * 1024) {
-                                showToast('File size exceeds 50MB limit', 'error');
+                              if (selectedFile.size > 25 * 1024 * 1024) {
+                                showToast('File size exceeds 25MB limit', 'error');
                                 e.target.value = ''; // Clear input
                                 setFile(null);
                               } else {
@@ -334,15 +347,38 @@ export default function Home() {
                           required
                         />
                         <div className="flex flex-col items-center gap-3 text-muted-foreground">
-                          <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                            <Upload className="w-6 h-6" />
-                          </div>
-                          <div className="space-y-1">
-                            <span className="text-base font-medium text-foreground block">
-                              {file ? file.name : "Click to upload file"}
-                            </span>
-                            <span className="text-xs text-muted-foreground">Max 50MB (Images, PDF)</span>
-                          </div>
+                          {file ? (
+                            <div className="space-y-2">
+                              {file.type.startsWith('image/') ? (
+                                <div className="w-24 h-24 mx-auto rounded-xl overflow-hidden border border-border shadow-sm">
+                                  <img src={URL.createObjectURL(file)} alt="Preview" className="w-full h-full object-cover" />
+                                </div>
+                              ) : (
+                                <div className="w-16 h-16 mx-auto bg-red-500/10 text-red-500 rounded-xl flex items-center justify-center">
+                                  <span className="text-xs font-bold">PDF</span>
+                                </div>
+                              )}
+                              <div className="space-y-1">
+                                <span className="text-base font-medium text-foreground block truncate max-w-[200px]">
+                                  {file.name}
+                                </span>
+                                <span className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                              </div>
+                              <p className="text-xs text-primary font-medium">Click to change file</p>
+                            </div>
+                          ) : (
+                            <>
+                              <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                                <Upload className="w-6 h-6" />
+                              </div>
+                              <div className="space-y-1">
+                                <span className="text-base font-medium text-foreground block">
+                                  Click to upload file
+                                </span>
+                                <span className="text-xs text-muted-foreground">Max 25MB (Images, PDF)</span>
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
