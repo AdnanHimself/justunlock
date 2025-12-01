@@ -103,30 +103,7 @@ export default function HowItWorksPage() {
                         </div>
                     </div>
 
-                    <div className="text-center bg-secondary/30 p-6 rounded-2xl space-y-4">
-                        <p className="font-medium text-foreground text-lg">
-                            &quot;Think of JustUnlock as a digital vending machine. Quick, easy, and direct.&quot;
-                        </p>
-                        <div className="pt-2">
-                            <Link href="/use-cases">
-                                <Button variant="secondary" className="rounded-full px-6 gap-2">
-                                    Explore Use Cases <ArrowRight className="w-4 h-4" />
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-
-                {/* FAQ Section */}
-                <div className="space-y-8 pt-10 md:pt-12 border-t border-border">
-                    <div className="bg-primary/10 border border-primary/20 rounded-3xl p-8 md:p-10 text-center space-y-4">
-                        <h2 className="text-2xl md:text-3xl font-bold">The Digital Vending Machine for Web3.</h2>
-                        <p className="text-foreground/80 max-w-2xl mx-auto text-lg leading-relaxed">
-                            Is it unhackable DRM? No. It’s a friction-free way to collect micro-payments for low-ticket items, deposits, and instant access. Quick, easy, and direct to your wallet.
-                        </p>
-                    </div>
-
-                    <h2 className="text-3xl font-bold text-center pt-6">Frequently Asked Questions</h2>
+                    {/* FAQ Section */}
                     <div className="grid gap-6 md:gap-8 md:grid-cols-2">
                         <div className="p-6 md:p-8 bg-secondary/20 rounded-2xl">
                             <h4 className="font-semibold mb-2 md:mb-3 text-lg">Does JustUnlock take a fee?</h4>

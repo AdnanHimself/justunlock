@@ -142,9 +142,6 @@ export default function UseCasesList() {
                                             <div key={platform.id} className="group flex flex-col bg-background border-2 border-border hover:border-primary rounded-3xl p-8 transition-all duration-300 h-full">
                                                 <div className="flex items-center justify-between mb-6">
                                                     <h3 className="text-2xl font-bold">{platform.name}</h3>
-                                                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                                                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                                                    </div>
                                                 </div>
 
                                                 <div className="flex-1">
@@ -160,15 +157,6 @@ export default function UseCasesList() {
                                                             </li>
                                                         ))}
                                                     </ul>
-                                                </div>
-
-                                                <div className="mt-8 pt-6 border-t border-border/50">
-                                                    <Link
-                                                        href={`/use-cases/sell-content-on-${platform.id}`}
-                                                        className="text-sm font-semibold text-primary flex items-center gap-2 hover:gap-3 transition-all"
-                                                    >
-                                                        View all guides <ArrowRight className="w-4 h-4" />
-                                                    </Link>
                                                 </div>
                                             </div>
                                         );
@@ -208,7 +196,7 @@ export default function UseCasesList() {
                     </div>
                     <Link href="/">
                         <Button className="h-14 px-8 text-lg rounded-full gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 font-bold">
-                            Create Link Now <ArrowRight className="w-5 h-5" />
+                            Create Link Now
                         </Button>
                     </Link>
                 </div>
