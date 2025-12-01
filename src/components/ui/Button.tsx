@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
     disabled,
     ...props
 }) => {
-    const baseStyles = "w-full font-semibold py-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-transparent cursor-pointer";
+    const baseStyles = "font-semibold py-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-transparent cursor-pointer";
 
     const variants = {
         primary: "bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20",
