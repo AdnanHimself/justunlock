@@ -388,6 +388,7 @@ export default function Home() {
                   type="submit"
                   isLoading={loading}
                   disabled={loading}
+                  variant="success"
                   className="w-full h-12 text-base font-bold rounded-2xl transition-all"
                 >
                   {isConnected ? 'Create Paywall' : 'Create Paywall'}
