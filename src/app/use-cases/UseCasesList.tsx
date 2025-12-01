@@ -81,23 +81,23 @@ export default function UseCasesList() {
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-md mx-auto relative mt-8 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200">
-                            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                                <Search className="h-5 w-5 text-muted-foreground" />
+                        <div className="max-w-md mx-auto relative mt-8 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200 group">
+                            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none z-30">
+                                <Search className="h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                             </div>
                             <input
                                 type="text"
                                 placeholder="Find your platform (e.g. Notion, Telegram)..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-10 pr-10 py-3 rounded-full border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-sm hover:shadow-md"
+                                className="w-full pl-10 pr-10 py-4 text-lg rounded-full border border-border bg-background/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-lg hover:shadow-xl relative z-20"
                             />
                             {searchTerm && (
                                 <button
                                     onClick={() => setSearchTerm('')}
-                                    className="absolute inset-y-0 right-3 flex items-center text-muted-foreground hover:text-foreground"
+                                    className="absolute inset-y-0 right-3 flex items-center text-muted-foreground hover:text-foreground z-30 cursor-pointer"
                                 >
-                                    <X className="h-4 w-4" />
+                                    <X className="h-5 w-5" />
                                 </button>
                             )}
                         </div>
