@@ -139,7 +139,7 @@ export default function UseCasesList() {
                                         if (topLinks.length === 0) return null;
 
                                         return (
-                                            <div key={platform.id} className="group flex flex-col bg-background border-2 border-border hover:border-primary/50 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 h-full">
+                                            <div key={platform.id} className="group flex flex-col bg-background border-2 border-border hover:border-primary rounded-3xl p-8 transition-all duration-300 h-full">
                                                 <div className="flex items-center justify-between mb-6">
                                                     <h3 className="text-2xl font-bold">{platform.name}</h3>
                                                     <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
@@ -207,8 +207,8 @@ export default function UseCasesList() {
                         </p>
                     </div>
                     <Link href="/">
-                        <Button className="h-16 px-12 text-xl rounded-full gap-3 shadow-none border-2 border-primary hover:bg-primary/5 transition-all duration-300">
-                            Create Link Now <ArrowRight className="w-6 h-6" />
+                        <Button className="h-14 px-8 text-lg rounded-full gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 font-bold">
+                            Create Link Now <ArrowRight className="w-5 h-5" />
                         </Button>
                     </Link>
                 </div>

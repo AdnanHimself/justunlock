@@ -52,7 +52,7 @@ export default function HowItWorksPage() {
                 {/* Pro Tips */}
                 <div className="bg-secondary/20 border border-border rounded-3xl p-8 md:p-10 space-y-8">
                     <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
-                        <span className="text-yellow-500">💡</span> How to maximize sales
+                        <span className="text-primary">💡</span> How to maximize sales
                     </h2>
                     <div className="grid gap-8 md:grid-cols-3">
                         <div className="space-y-3">

@@ -460,7 +460,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12 border-y border-border/50 bg-secondary/10">
             <div className="text-center space-y-2">
               <div className="flex justify-center mb-2">
-                <Zap className="w-8 h-8 text-yellow-500" />
+                <Zap className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-lg font-bold">Direct Payouts</h3>
               <p className="text-foreground/80 text-sm px-4">Funds go straight to your wallet. No holding periods.</p>
@@ -523,9 +523,9 @@ export default function Home() {
 
             <div className="flex justify-center pt-8">
               <Link href="/use-cases">
-                <Button variant="secondary" className="rounded-full px-12 h-14 text-lg gap-3 group min-w-[240px]">
+                <Button variant="primary" className="rounded-full px-8 h-12 text-base gap-2 group min-w-[200px] font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
                   View All Use Cases
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>
