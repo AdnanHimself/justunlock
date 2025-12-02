@@ -17,7 +17,9 @@ export function LinksTab({ supabase }: any) {
                     .order('created_at', { ascending: false });
 
                 if (error) throw error;
-                setLinks(data || []);
+                // Filter out any links that might have missing IDs to prevent /undefined errors
+                const validLinks = (data || []).filter((link: any) => link.id);
+                setLinks(validLinks);
             } catch (err) {
                 console.error('Error fetching links:', err);
             } finally {
@@ -28,11 +30,14 @@ export function LinksTab({ supabase }: any) {
         fetchLinks();
     }, [supabase]);
 
-    const filteredLinks = links.filter(link =>
-        link.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        link.receiver_address?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        link.id?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredLinks = links.filter(link => {
+        const term = searchTerm.toLowerCase();
+        return (
+            (link.title && link.title.toLowerCase().includes(term)) ||
+            (link.receiver_address && link.receiver_address.toLowerCase().includes(term)) ||
+            (link.id && link.id.toLowerCase().includes(term))
+        );
+    });
 
     if (loading) return <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />;
 

@@ -25,7 +25,7 @@ export const Button: React.FC<ButtonProps> = ({
         success: "bg-green-600 hover:bg-green-500 text-white", // Keeping green for success as it's specific
         danger: "bg-destructive hover:bg-destructive/90 text-destructive-foreground",
         gold: "bg-amber-400 hover:bg-amber-300 text-black border border-amber-500/50 shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]",
-        "high-contrast": "bg-black text-white border-2 border-white dark:bg-white dark:text-black dark:border-black hover:opacity-90 shadow-lg",
+        "high-contrast": "bg-foreground text-background border-2 border-foreground hover:opacity-90 shadow-lg",
     };
 
     return (

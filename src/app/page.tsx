@@ -428,7 +428,7 @@ export default function Home() {
                   disabled={loading}
                   variant="high-contrast"
                   className="w-full h-12 text-base font-bold rounded-2xl transition-all"
-                  icon={loading ? undefined : <Unlock className="w-5 h-5" />}
+                  icon={loading ? undefined : <Unlock className="w-5 h-5 text-red-500" />}
                 >
                   {isConnected ? 'Create Paywall' : 'Create Paywall'}
                 </Button>
