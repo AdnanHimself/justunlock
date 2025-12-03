@@ -9,7 +9,6 @@ import { formatDistanceToNow } from 'date-fns';
 
 interface LinkData {
     id: string;
-    short_id: string;
     title: string;
     price: number;
     currency: string;
@@ -176,7 +175,7 @@ export default function MyLinksPage() {
 
                                     <div className="flex items-center gap-2 md:gap-3">
                                         <button
-                                            onClick={() => copyToClipboard(`${window.location.origin}/${link.short_id}`, link.id)}
+                                            onClick={() => copyToClipboard(`${window.location.origin}/${link.id}`, link.id)}
                                             className="p-1.5 md:p-2 hover:bg-secondary rounded-lg transition-colors"
                                             title="Copy Link"
                                         >
@@ -187,7 +186,7 @@ export default function MyLinksPage() {
                                             )}
                                         </button>
                                         <Link
-                                            href={`/${link.short_id}`}
+                                            href={`/${link.id}`}
                                             className="p-1.5 md:p-2 hover:bg-secondary rounded-lg transition-colors"
                                             title="View Page"
                                         >
