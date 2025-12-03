@@ -9,6 +9,7 @@ import { useTheme } from 'next-themes';
 import { Sun, Moon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
+import { NotificationBell } from './NotificationBell';
 
 // V3 Contract Address (Base Mainnet)
 const CONTRACT_ADDRESS = '0xD2F2964Ac4665B539e7De9Dc3B14b1A8173c02E0';
@@ -85,8 +86,9 @@ export function Navbar() {
                         ))}
                     </div>
 
-                    {/* Actions (Theme + Connect) - Pushed to right */}
+                    {/* Actions (Notifications + Theme + Connect) - Pushed to right */}
                     <div className="flex items-center gap-2 md:gap-4 shrink-0 ml-auto">
+                        <NotificationBell />
                         {mounted && (
                             <button
                                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
